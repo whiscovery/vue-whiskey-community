@@ -64,16 +64,16 @@
             </li>
 
             <li>
-              <a href="#" class="nav-link text-white">
+              <router-link to="/List" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
                 List
-              </a>
+              </router-link>
             </li>
             <li>
-              <a href="#" class="nav-link text-white">
+              <router-link to="/input" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
-                Dashboard
-              </a>
+                New Whiskey
+              </router-link>
             </li>
         <div class="dropdown text-end">
           <a href="#" class="nav-link text-white dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">

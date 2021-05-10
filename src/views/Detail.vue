@@ -2,18 +2,19 @@
   <div class="container overflow-hidden">
     <!-- <h4>Detail</h4>
     <p>{{$route.params.id}}</p> -->
-      <div class="row gx-5">
-        <div class="col-sm-5">
-          <div class="shadow-sm p-3 mt-3 mb-5 bg-body rounded"><WhiskeyPhoto :whiskeys="whiskeys" /></div>
+      <div class="row gx-2 mt-5">
+        <div class="test col-sm-3">
+          <div><WhiskeyPhoto :whiskey="whiskey" /></div>
         </div>
-        <div class="col-sm-7">
-          <div class="shadow-sm p-3 mt-3 mb-5 bg-body rounded"><WhiskeyInfo :whiskeys="whiskeys" /></div>
+        <div class="test col-sm-9">
+          <div class="p-3 mt-3"><WhiskeyInfo :whiskey="whiskey" /></div>
+          <div class="p-3 mt-3 mb-5"><WhiskeyComment :whiskey="whiskey" /></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm"><WhiskeyStatics :whiskeys="whiskeys" /></div>
-        <div class="col-sm"><WhiskeyComment :whiskeys="whiskeys" /></div>
-        <div class="col-sm"></div>
+      <div class="row gx-2">
+        <div class="test col-sm"><WhiskeyStatics :whiskeys="whiskeys" /></div>
+        <div class="test col-sm"></div>
+        <div class="test col-sm"></div>
       </div>
 
   </div>
@@ -30,7 +31,7 @@ export default {
   name: 'List',
   data () {
     return {
-      whiskey: this.whiskeys.$route.params.id
+      whiskey: {}
     }
   },
   components: {
@@ -40,8 +41,14 @@ export default {
     WhiskeyComment: WhiskeyComment
 
   },
+  created () {
+    this.whiskey = this.whiskeys[parseInt(this.$route.params.id) - 1]
+  },
   props: {
     whiskeys: Array
   }
 }
 </script>
+
+<style scoped>
+</style>

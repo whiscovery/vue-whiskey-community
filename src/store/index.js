@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import datas from '@/assets/data.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    whiskeys: datas
+    whiskeys: []
   },
   mutations: {
     FETCH_WHISKEY_POST (state, payload) {

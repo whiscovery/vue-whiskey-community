@@ -58,6 +58,6 @@ export default {
   color: #42b983;
 }
 /* 전환효과 (Fade) */
-.fade-enter-active, .fade-leave-active { transition: opacity 1s; }
-.fade-enter, .fade-leave-to { opacity: 0.2; }
+.fade-enter-active, .fade-leave-active { transition: opacity 0.5s; }
+.fade-enter, .fade-leave-to { opacity: 0.1; }
 </style>

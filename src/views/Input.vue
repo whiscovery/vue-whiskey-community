@@ -3,40 +3,40 @@
   <h3> 위스키 입력 </h3>
   <form class="row g-3 mt-3">
     <div class="col-md-6 form-floating mb-3">
-      <input type="text" v-model="name" class="form-control" id="floatingInput" placeholder="위스키 제품명">
-      <label for="floatingInput">제품명(영문)</label>
+      <input type="text" v-model="name" class="form-control" id="name" placeholder="위스키 제품명">
+      <label for="name">제품명(영문)</label>
     </div>
     <div class="col-md-4 form-floating mb-3">
-      <select v-model="category" id="floatingInput" class="form-select">
+      <select v-model="category" id="category" class="form-select">
         <option>스카치 위스키</option>
         <option>버번 위스키</option>
       </select>
-      <label for="floatingInput">종류</label>
+      <label for="category">종류</label>
     </div>
     <div class="col-md-2 form-floating mb-3">
-      <input type="text" v-model="degree" class="form-control" id="111" placeholder="name@example.com">
-      <label for="111">도수</label>
+      <input type="text" v-model="degree" class="form-control" id="degree" placeholder="name@example.com">
+      <label for="degree">도수</label>
     </div>
 
     <div class="col-md-8 form-floating mb-3">
-      <input type="text" v-model="image" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">이미지 URL</label>
+      <input type="text" v-model="image" class="form-control" id="image" placeholder="name@example.com">
+      <label for="image">이미지 URL</label>
     </div>
     <div class="col-md-4 form-floating mb-3">
-      <input type="text" v-model="price" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">가격대</label>
+      <input type="text" v-model="price" class="form-control" id="price" placeholder="name@example.com">
+      <label for="price">가격대</label>
     </div>
     <div class="form-floating">
-  <textarea v-model="tasting" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 80px"></textarea>
-    <label for="floatingTextarea2">테이스팅</label>
+  <textarea v-model="tasting" class="form-control" placeholder="Leave a comment here" id="tasting" style="height: 80px"></textarea>
+    <label for="tasting">테이스팅</label>
   </div>
   <div class="form-floating">
-  <textarea v-model="desc" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 120px"></textarea>
-    <label for="floatingTextarea2">정보</label>
+  <textarea v-model="desc" class="form-control" placeholder="Leave a comment here" id="desc" style="height: 120px"></textarea>
+    <label for="desc">정보</label>
   </div>
   <div class="form-floating">
-  <textarea v-model="etc" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 120px"></textarea>
-    <label for="floatingTextarea2">기타지식</label>
+  <textarea v-model="etc" class="form-control" placeholder="Leave a comment here" id="etc" style="height: 120px"></textarea>
+    <label for="etc">기타지식</label>
   </div>
     <div class="col-12">
       <button @click="btnOK" type="submit" class="btn btn-primary">입 력</button>

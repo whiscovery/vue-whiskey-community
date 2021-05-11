@@ -2,11 +2,11 @@
 <div class="container mt-5">
   <h3> 위스키 입력 </h3>
   <form class="row g-3 mt-3">
-    <div class="col-md-6 form-floating mb-3">
+    <div class="col-md-5 form-floating mb-3">
       <input type="text" v-model="name" class="form-control" id="name" placeholder="위스키 제품명">
       <label for="name">제품명(영문)</label>
     </div>
-    <div class="col-md-4 form-floating mb-3">
+    <div class="col-md-3 form-floating mb-3">
       <select v-model="category" id="category" class="form-select">
         <option>스카치 위스키</option>
         <option>버번 위스키</option>
@@ -17,19 +17,27 @@
       <input type="text" v-model="degree" class="form-control" id="degree" placeholder="name@example.com">
       <label for="degree">도수</label>
     </div>
-
-    <div class="col-md-8 form-floating mb-3">
-      <input type="text" v-model="image" class="form-control" id="image" placeholder="name@example.com">
-      <label for="image">이미지 URL</label>
-    </div>
-    <div class="col-md-4 form-floating mb-3">
+    <div class="col-md-2 form-floating mb-3">
       <input type="text" v-model="price" class="form-control" id="price" placeholder="name@example.com">
       <label for="price">가격대</label>
     </div>
-    <div class="form-floating">
-  <textarea v-model="tasting" class="form-control" placeholder="Leave a comment here" id="tasting" style="height: 80px"></textarea>
-    <label for="tasting">테이스팅</label>
-  </div>
+      <div class="col-md-5">
+        <div class="text-center">
+          <img v-if="imgfile" :src="imgfile" class="no-img">
+          <img v-else src="http://dy.gnch.or.kr/img/no-image.jpg" class="no-img">
+        </div>
+        <div class="col-md-12 form-floating mb-3">
+          <input @change="handleImageUpload" type="file">
+          <!-- <input type="text" v-model="image" class="form-control" id="image" placeholder="name@example.com">
+          <label for="image">이미지 URL</label> -->
+        </div>
+      </div>
+      <div class="col-md-7">
+      <div class="form-floating">
+        <textarea v-model="tasting" class="form-control" placeholder="Leave a comment here" id="tasting" style="width: 100%; height: 300px"></textarea>
+        <label for="tasting">테이스팅</label>
+      </div>
+      </div>
   <div class="form-floating">
   <textarea v-model="desc" class="form-control" placeholder="Leave a comment here" id="desc" style="height: 120px"></textarea>
     <label for="desc">정보</label>
@@ -41,6 +49,12 @@
     <div class="col-12">
       <button @click="btnOK" type="submit" class="btn btn-primary">입 력</button>
     </div>
+  <!-- <div>
+    <img id=image v-if="imgfile" :src="imgfile">
+    <img v-else src="http://dy.gnch.or.kr/img/no-image.jpg">
+    <br />
+    <input @change.prevent="handleImageUpload" id="file" type="file">
+  </div> -->
   </form>
   {{whiskey}}
 </div>
@@ -52,11 +66,12 @@ export default {
   name: 'Input',
   data () {
     return {
+      imgfile: null,
       whiskey: {},
       name: '',
       category: '',
       degree: '',
-      image: '',
+      // image: '',
       price: '',
       tasting: '',
       desc: '',
@@ -69,7 +84,7 @@ export default {
         제품명: this.name,
         종류: this.category,
         도수: this.degree,
-        이미지: this.image,
+        이미지: this.imgfile,
         가격대: this.price,
         테이스팅: this.tasting,
         설명: this.desc,
@@ -82,11 +97,32 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    },
+    handleImageUpload (e) {
+      // const data = new FormData()
+      // data.append('image', e.target.files[0])
+      // console.log(data)
+      const data = e.target.files[0]
+      axios({
+        method: 'post',
+        url: 'https://api.imgur.com/3/image/',
+        data: data,
+        headers: { Authorization: 'Client-ID 2b9222138a7cc78' }
+      })
+        .then((res) => {
+          this.imgfile = res.data.data.link
+        })
+        .then((err) => {
+          console.log(err)
+        })
     }
   }
 }
 </script>
 
 <style>
-
+.no-img{
+  width: 100%;
+  margin-bottom: 20px;
+}
 </style>

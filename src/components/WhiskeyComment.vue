@@ -1,7 +1,7 @@
 <template>
 <div class="row align-items-center">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button class="btn btn-outline-dark btn-sm mb-2" type="button">코멘트 쓰기</button>
+  <button @click="$emit('commentModalOpen', whiskey.제품명)" class="btn btn-outline-dark btn-sm mb-2" type="button">코멘트 쓰기</button>
 </div>
   <div class="wrapper" v-for="comment,i in whiskey.코멘트" :key="i">
       <div class="speech-bubble">

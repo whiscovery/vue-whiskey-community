@@ -3,13 +3,16 @@
     <div id="header">
       <Header />
     </div>
-    <router-view :whiskeys="whiskeys" />
+    <transition name="fade">
+      <router-view :whiskeys="whiskeys" />
+    </transition>
   </div>
 </template>
 
 <script>
 import Header from './components/Header'
-import whiskeys from '@/assets/data.js'
+// import whiskeys from '@/assets/data.js'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -18,11 +21,19 @@ export default {
   },
   data () {
     return {
-      whiskeys: whiskeys
-      // whiskeylist: ['Woodford Reserve Straight Bourbon Whiskey', 'Wild Turkey 101']
+      whiskeys: []
     }
+  },
+  created () {
+    axios.get('http://localhost:4000/whiskey')
+      .then((res) => {
+        console.log(res)
+        this.whiskeys = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
-
 }
 </script>
 <style>
@@ -46,4 +57,7 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+/* 전환효과 (Fade) */
+.fade-enter-active, .fade-leave-active { transition: opacity 1s; }
+.fade-enter, .fade-leave-to { opacity: 0.2; }
 </style>

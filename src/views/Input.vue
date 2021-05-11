@@ -39,7 +39,7 @@
     <label for="floatingTextarea2">기타지식</label>
   </div>
     <div class="col-12">
-      <button @click.prevent="btnOK" type="submit" class="btn btn-primary">입 력</button>
+      <button @click="btnOK" type="submit" class="btn btn-primary">입 력</button>
     </div>
   </form>
   {{whiskey}}
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Input',
   data () {
@@ -64,7 +65,7 @@ export default {
   },
   methods: {
     btnOK () {
-      this.whiskey = {
+      axios.post('http://localhost:4000/input', {
         제품명: this.name,
         종류: this.category,
         도수: this.degree,
@@ -74,7 +75,13 @@ export default {
         설명: this.desc,
         기타지식: this.etc,
         코멘트: []
-      }
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }

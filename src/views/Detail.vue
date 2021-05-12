@@ -67,8 +67,8 @@ export default {
       .then((res) => {
         this.whiskey = res.data
       })
-      .then(()=>{
-        
+      .then(() => {
+
       })
       .catch((err) => {
         console.log(err)

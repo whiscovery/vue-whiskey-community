@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="row gx-2">
-        <div class="test col-sm"><WhiskeyStatics :whiskeys="whiskeys" /></div>
+        <div class="test col-sm"><WhiskeyStatics /></div>
         <div class="test col-sm"></div>
         <div class="test col-sm"></div>
       </div>
@@ -66,6 +66,9 @@ export default {
     axios.get(url)
       .then((res) => {
         this.whiskey = res.data
+      })
+      .then(()=>{
+        
       })
       .catch((err) => {
         console.log(err)

@@ -15,14 +15,20 @@
       <label class="label" for="일시">마신 날</label>
     </div>
   <div class="form-floating">
-  <textarea v-model="코멘트" class="form-control" placeholder="Leave a comment here" id="코멘트" style="height: 120px"></textarea>
+  <textarea v-model="내용" class="form-control" placeholder="Leave a comment here" id="코멘트" style="height: 120px"></textarea>
     <label class="label" for="코멘트">코멘트</label>
   </div>
+  <div class="btnmodi">
+    <button @click="btnModi" type="submit" class="btn btn-warning mt-3">수 정</button>
+  </div>
+
   </form>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'WriteComment',
   data () {
@@ -30,7 +36,29 @@ export default {
       이름: '',
       장소: '',
       일시: '',
-      코멘트: ''
+      내용: ''
+    }
+  },
+  methods: {
+    async btnModi () {
+      const id = this.$route.params.id
+      await this.$nextTick()
+      axios.post('http://localhost:4000/comment', {
+        postid: id,
+        이름: this.이름,
+        장소: this.장소,
+        일시: this.일시,
+        내용: this.내용
+      })
+        .then((res) => {
+          console.log(res)
+          if (res.status === 200) {
+            this.$router.push({ name: 'Detail', params: { id: this.$route.params.id } }).catch(() => {})
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 
@@ -40,5 +68,8 @@ export default {
 <style scope>
 .label{
   font-weight: 400;
+}
+.btnmodi{
+  margin: 0px auto;
 }
 </style>

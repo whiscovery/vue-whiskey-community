@@ -126,7 +126,8 @@ export default {
 
 <style>
 .no-img{
-  width: 150px;
+ width: 80%;
+ max-height: 300px;
   margin-bottom: 20px;
 }
 </style>

@@ -12,7 +12,7 @@
 <script>
 import Header from './components/Header'
 // import whiskeys from '@/assets/data.js'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'App',
@@ -23,16 +23,6 @@ export default {
     return {
       whiskeys: []
     }
-  },
-  created () {
-    axios.get('http://localhost:4000/whiskey')
-      .then((res) => {
-        console.log(res)
-        this.whiskeys = res.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
   }
 }
 </script>

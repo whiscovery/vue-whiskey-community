@@ -10,6 +10,7 @@
       <select v-model="category" id="category" class="form-select">
         <option>스카치 위스키</option>
         <option>버번 위스키</option>
+        <option>레이 위스키</option>
       </select>
       <label for="category">종류</label>
     </div>
@@ -47,7 +48,7 @@
     <label for="etc">기타지식</label>
   </div>
     <div class="col-12">
-      <button @click="btnOK" type="submit" class="btn btn-primary">입 력</button>
+      <button @click.prevent="btnOK" type="submit" class="btn btn-primary">입 력</button>
     </div>
   <!-- <div>
     <img id=image v-if="imgfile" :src="imgfile">
@@ -56,7 +57,6 @@
     <input @change.prevent="handleImageUpload" id="file" type="file">
   </div> -->
   </form>
-  {{whiskey}}
 </div>
 </template>
 
@@ -93,6 +93,10 @@ export default {
       })
         .then((res) => {
           console.log(res)
+
+          this.$router.push({
+            name: 'list'
+          })
         })
         .catch((err) => {
           console.log(err)
@@ -122,7 +126,7 @@ export default {
 
 <style>
 .no-img{
-  width: 100%;
+  width: 150px;
   margin-bottom: 20px;
 }
 </style>

@@ -3,7 +3,7 @@
             <img :src="whiskey.이미지" class="thumbnail-whiskey">
 
             <div class="card-body">
-              <p class="card-text"><router-link class="text-link" :to="{ name: 'Detail', params: { id: whiskey._id }}">{{whiskey.제품명}}</router-link></p>
+              <p class="card-text text-truncate"><router-link class="text-link" :to="{ name: 'Detail', params: { id: whiskey._id }}">{{whiskey.제품명}}</router-link></p>
               <div class="d-flex justify-content-between align-items-center">
                 <small class="list-small">{{whiskey.종류}}</small>
               </div>
@@ -22,5 +22,9 @@ export default {
 </script>
 
 <style>
-
+.thumbnail-whiskey{
+  width: auto;
+  height: 210px;
+  object-fit: contain;
+}
 </style>

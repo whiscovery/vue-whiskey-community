@@ -3,9 +3,7 @@
 <transition name="contactModal">
   <div v-if="commentwriteModal" class="black-bg">
     <div class="white-bg">
-      <label for="customRange1" class="form-label">Example range</label>
-      {{commentwhiskeyname}}
-<input type="range" class="form-range" id="customRange1">
+      <WriteComment />
       <button type="submit" class="button-menu" @click="commentwriteModal=false">CLOSE</button>
       </div>
   </div>
@@ -18,10 +16,10 @@
     <p>{{$route.params.id}}</p> -->
       <div class="row gx-2 mt-5">
         <div class="test col-sm-3">
-          <div><WhiskeyPhoto :whiskey="whiskey" /></div>
+          <div><WhiskeyPhoto /></div>
         </div>
         <div class="test col-sm-9">
-          <div class="p-3 mt-3"><WhiskeyInfo :whiskey="whiskey" /></div>
+          <div class="p-3 mt-3"><WhiskeyInfo /></div>
           <div class="p-3 mt-3 mb-5"><WhiskeyComment :whiskey="whiskey" @commentModalOpen="commentwriteModal = true; commentwhiskeyname = $event" /></div>
         </div>
       </div>
@@ -40,6 +38,8 @@ import WhiskeyStatics from '@/components/WhiskeyStatics'
 import WhiskeyPhoto from '@/components/WhiskeyPhoto'
 import WhiskeyInfo from '@/components/WhiskeyInfo'
 import WhiskeyComment from '@/components/WhiskeyComment'
+import WriteComment from '@/components/WriteComment'
+import axios from 'axios'
 
 export default {
   name: 'List',
@@ -54,20 +54,29 @@ export default {
     WhiskeyPhoto: WhiskeyPhoto,
     WhiskeyStatics: WhiskeyStatics,
     WhiskeyInfo: WhiskeyInfo,
-    WhiskeyComment: WhiskeyComment
+    WhiskeyComment: WhiskeyComment,
+    WriteComment: WriteComment
 
   },
-  created () {
-    this.whiskey = this.whiskeys[parseInt(this.$route.params.id) - 1]
-  },
-  props: {
-    whiskeys: Array
+  // created () {
+  //   // this.whiskey = this.whiskeys[parseInt(this.$route.params.id) - 1]
+  // },,
+  async created () {
+    const url = 'http://localhost:4000/whiskey/' + this.$route.params.id
+    axios.get(url)
+      .then((res) => {
+        this.whiskey = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    await this.$nextTick()
   }
+
 }
 </script>
 
 <style scoped>
-
 .black-bg {
   width : 100%;
   height: 100%;

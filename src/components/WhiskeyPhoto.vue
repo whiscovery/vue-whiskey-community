@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="photo">
-      <img :src="whiskey.이미지" class="photo-img">
+      <img :src="image" class="photo-img">
     </div>
     <div class="report">
       <div class="report-desc">
@@ -17,10 +17,27 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'WhiskeyPhoto',
-  props: {
-    whiskey: Object
+  // props: {
+  //   whiskey: Object
+  // },
+  data () {
+    return {
+      image: ''
+    }
+  },
+  async created () {
+    const url = 'http://localhost:4000/whiskey/' + this.$route.params.id
+    axios.get(url)
+      .then((res) => {
+        this.image = res.data.이미지
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    await this.$nextTick()
   }
 
 }

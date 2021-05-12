@@ -64,7 +64,7 @@
             </li>
 
             <li>
-              <router-link to="/List" class="nav-link text-white">
+              <router-link to="/list" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
                 List
               </router-link>

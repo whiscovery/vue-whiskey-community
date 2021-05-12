@@ -1,11 +1,11 @@
 <template>
 <div class="row align-items-center">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button @click="$emit('commentModalOpen', whiskey.제품명)" class="btn btn-outline-dark btn-sm mb-2" type="button">코멘트 쓰기</button>
+  <button @click="$emit('commentModalOpen', name)" class="btn btn-outline-dark btn-sm mb-2" type="button">코멘트 쓰기</button>
 </div>
-  <div class="wrapper" v-for="comment,i in whiskey.코멘트" :key="i">
+  <div class="wrapper" v-for="comment,i in comments" :key="i">
       <div class="speech-bubble">
-          <span class="badge bg-primary name">{{comment.이름}} </span><span> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}})</small> </span>
+          <span class="badge bg-primary name">{{comment.이름}} </span><span class="comment-content"> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}})</small> </span>
       </div>
   </div>
 </div>
@@ -13,10 +13,26 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'WhiskeyComment',
-  props: {
-    whiskey: Object
+  data () {
+    return {
+      name: '',
+      comments: []
+    }
+  },
+  async created () {
+    const url = 'http://localhost:4000/whiskey/' + this.$route.params.id
+    axios.get(url)
+      .then((res) => {
+        console.log(res.data.코멘트)
+        this.comments = res.data.코멘트
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    await this.$nextTick()
   }
 }
 </script>
@@ -48,5 +64,8 @@ export default {
     position:absolute;
     top:10px;
     left:-15px;
+}
+.comment-content{
+  font-size: 13px;
 }
 </style>

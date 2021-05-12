@@ -20,19 +20,27 @@
 
 <script>
 import Listitem from '@/components/Listitem'
+import axios from 'axios'
 
 export default {
   name: 'List',
   data () {
     return {
-      whiskeysearch: ''
+      whiskeysearch: '',
+      whiskeys: []
     }
   },
   components: {
     Listitem: Listitem
   },
-  props: {
-    whiskeys: Array
+  created () {
+    axios.get('http://localhost:4000/whiskey')
+      .then((res) => {
+        this.whiskeys = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
   computed: {
     // 위스키 정보 데이터 중 '제품명' 필드에 검색어가 포함되어 있는지 확인 후 참이면 반환

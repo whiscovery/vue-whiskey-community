@@ -8,6 +8,14 @@
       </div>
   </div>
 </transition>
+<transition name="contactModal">
+  <div v-if="taistwriteModal" class="black-bg">
+    <div class="white-bg">
+      <WriteTaisting />
+      <button type="submit" class="button-menu" @click="taistwriteModal=false">CLOSE</button>
+      </div>
+  </div>
+</transition>
   <div class="container overflow-hidden">
       <!-- Modal -->
 
@@ -17,6 +25,8 @@
       <div class="row gx-2 mt-5">
         <div class="test col-sm-3">
           <div><WhiskeyPhoto /></div>
+          <div><WhiskeyStatics /></div>
+          <button @click="taistwriteModal=true">맛평가하기</button>
         </div>
         <div class="test col-sm-9">
           <div class="p-3 mt-3"><WhiskeyInfo /></div>
@@ -24,7 +34,7 @@
         </div>
       </div>
       <div class="row gx-2">
-        <div class="test col-sm"><WhiskeyStatics /></div>
+        <div class="test col-sm"></div>
         <div class="test col-sm"></div>
         <div class="test col-sm"></div>
       </div>
@@ -39,6 +49,7 @@ import WhiskeyPhoto from '@/components/WhiskeyPhoto'
 import WhiskeyInfo from '@/components/WhiskeyInfo'
 import WhiskeyComment from '@/components/WhiskeyComment'
 import WriteComment from '@/components/WriteComment'
+import WriteTaisting from '@/components/WriteTaisting'
 import axios from 'axios'
 
 export default {
@@ -47,7 +58,8 @@ export default {
     return {
       whiskey: {},
       commentwhiskeyname: null,
-      commentwriteModal: false
+      commentwriteModal: false,
+      taistwriteModal: false
     }
   },
   components: {
@@ -55,8 +67,8 @@ export default {
     WhiskeyStatics: WhiskeyStatics,
     WhiskeyInfo: WhiskeyInfo,
     WhiskeyComment: WhiskeyComment,
-    WriteComment: WriteComment
-
+    WriteComment: WriteComment,
+    WriteTaisting: WriteTaisting
   },
   // created () {
   //   // this.whiskey = this.whiskeys[parseInt(this.$route.params.id) - 1]

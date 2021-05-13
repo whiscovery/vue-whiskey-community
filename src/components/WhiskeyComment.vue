@@ -23,11 +23,11 @@ export default {
     }
   },
   async created () {
-    const url = 'http://localhost:4000/whiskey/' + this.$route.params.id
+    const url = 'http://localhost:4000/comment/' + this.$route.params.id
     axios.get(url)
       .then((res) => {
         console.log(res.data.코멘트)
-        this.comments = res.data.코멘트
+        this.comments = res.data
       })
       .catch((err) => {
         console.log(err)

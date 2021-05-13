@@ -113,6 +113,7 @@ export default {
         기타지식: this.etc
       })
         .then((res) => {
+          alert('수정되었습니다')
           this.modistate = false
         })
         .catch((err) => {

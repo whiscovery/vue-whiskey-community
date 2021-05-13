@@ -68,7 +68,6 @@ export default {
         this.whiskey = res.data
       })
       .then(() => {
-
       })
       .catch((err) => {
         console.log(err)

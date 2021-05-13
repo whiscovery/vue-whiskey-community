@@ -43,8 +43,8 @@ export default {
     async btnModi () {
       const id = this.$route.params.id
       await this.$nextTick()
-      axios.post('http://localhost:4000/comment', {
-        postid: id,
+      axios.post('http://localhost:4000/writecomment', {
+        whiskeyid: id,
         이름: this.이름,
         장소: this.장소,
         일시: this.일시,
@@ -52,6 +52,7 @@ export default {
       })
         .then((res) => {
           console.log(res)
+          alert('코멘트 작성 완료')
           if (res.status === 200) {
             this.$router.push({ name: 'Detail', params: { id: this.$route.params.id } }).catch(() => {})
           }

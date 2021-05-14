@@ -88,8 +88,7 @@ export default {
         가격대: this.price,
         테이스팅: this.tasting,
         설명: this.desc,
-        기타지식: this.etc,
-        코멘트: []
+        기타지식: this.etc
       })
         .then((res) => {
           console.log(res)

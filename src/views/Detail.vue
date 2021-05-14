@@ -11,7 +11,7 @@
 <transition name="contactModal">
   <div v-if="taistwriteModal" class="black-bg">
     <div class="white-bg">
-      <WriteTaisting />
+      <WriteTaisting :id="whiskey._id" :제품명="whiskey.제품명" />
       <button type="submit" class="button-menu" @click="taistwriteModal=false">CLOSE</button>
       </div>
   </div>
@@ -26,7 +26,7 @@
         <div class="test col-sm-3">
           <div><WhiskeyPhoto /></div>
           <div><WhiskeyStatics /></div>
-          <button @click="taistwriteModal=true">맛평가하기</button>
+          <button @click="taistwriteModal=true" class="btn btn-outline-dark btn-sm mt-3">맛평가하기</button>
         </div>
         <div class="test col-sm-9">
           <div class="p-3 mt-3"><WhiskeyInfo /></div>

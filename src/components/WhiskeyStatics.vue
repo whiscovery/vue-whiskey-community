@@ -1,5 +1,6 @@
 
 <PolarArea :chartdata="datas" :options="options" />
+
 <script>
 import { PolarArea } from 'vue-chartjs'
 
@@ -9,6 +10,9 @@ export default {
     PolarArea: PolarArea
   },
   extends: PolarArea,
+  props: {
+    테이스팅점수: Array
+  },
   data () {
     return {
       datas: {
@@ -42,6 +46,7 @@ export default {
   },
   mounted () {
     this.renderChart(this.datas, this.options)
+    console.log(this.테이스팅점수)
   }
 
 }

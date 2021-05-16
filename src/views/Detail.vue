@@ -24,8 +24,8 @@
     <p>{{$route.params.id}}</p> -->
       <div class="row gx-2 mt-5">
         <div class="test col-sm-3">
-          <div><WhiskeyPhoto /></div>
-          <div><WhiskeyStatics /></div>
+          <div><WhiskeyPhoto /></div>{{whiskey.테이스팅점수}}
+          <div><WhiskeyStatics :테이스팅점수="whiskey.테이스팅점수" /></div>
           <button @click="taistwriteModal=true" class="btn btn-outline-dark btn-sm mt-3">맛평가하기</button>
         </div>
         <div class="test col-sm-9">

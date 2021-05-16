@@ -19,7 +19,7 @@
     <label class="label" for="코멘트">코멘트</label>
   </div>
   <div class="btnmodi">
-    <button @click.prevent="btnModi" type="submit" class="btn btn-warning mt-3">코멘트 입력</button>
+    <button @click="btnModi" type="submit" class="btn btn-warning mt-3">코멘트 입력</button><button @click="$emit('closeModal')" type="submit" class="btn btn-success ms-3 mt-3">창닫기</button>
   </div>
 
   </form>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 import Datepicker from 'vuejs-datepicker'
 
 export default {
@@ -47,24 +47,23 @@ export default {
     async btnModi () {
       const id = this.$route.params.id
       await this.$nextTick()
-      console.log(id + '-' + this.일시.toLocaleString('ko-KR', { timeZone: 'UTC' }))
-      // axios.post('http://localhost:4000/writecomment', {
-      //   whiskeyid: id,
-      //   이름: this.이름,
-      //   장소: this.장소,
-      //   일시: this.일시.toLocaleString({ year: 'numeric', month: 'long', day: 'numeric' }),
-      //   내용: this.내용
-      // })
-      //   .then((res) => {
-      //     console.log(res)
-      //     alert('코멘트 작성 완료')
-      //     if (res.status === 200) {
-      //       this.$router.push({ name: 'Detail', params: { id: this.$route.params.id } }).catch(() => {})
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err)
-      //   })
+      axios.post('http://localhost:4000/writecomment', {
+        whiskeyid: id,
+        이름: this.이름,
+        장소: this.장소,
+        일시: new Intl.DateTimeFormat('en-US').format(this.일시),
+        내용: this.내용
+      })
+        .then((res) => {
+          console.log(res)
+          alert('코멘트 작성 완료')
+          if (res.status === 200) {
+            this.$router.push({ name: 'Detail', params: { id: this.$route.params.id } }).catch(() => {})
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 

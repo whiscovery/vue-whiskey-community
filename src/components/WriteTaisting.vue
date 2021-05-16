@@ -44,7 +44,9 @@
       <input type="range" class="form-range" min="0" max="100" step="5" v-model="taisting몰트">
     </div>
   </div>
-  <button type="submit" @click.prevent="btnOK">Click</button>
+  <div style="text-align: center">
+  <button class="button-menu" type="submit" @click="btnOK">테이스팅하기</button><button type="submit" class="button-menu ms-3" @click="$emit('closeModal')">닫기</button>
+  </div>
     </form>
 </div>
 </template>
@@ -78,6 +80,7 @@ export default {
       }
       axios.post('http://localhost:4000/writepost/taisting', data)
         .then((res) => {
+          alert('테이스팅 점수가 저장되었습니다')
           console.log(res)
         })
         .catch((err) => {

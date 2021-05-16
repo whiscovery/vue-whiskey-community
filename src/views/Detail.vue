@@ -3,16 +3,14 @@
 <transition name="contactModal">
   <div v-if="commentwriteModal" class="black-bg">
     <div class="white-bg">
-      <WriteComment />
-      <button type="submit" class="button-menu" @click="commentwriteModal=false">CLOSE</button>
+      <WriteComment @closeModal="commentwriteModal=false" />
       </div>
   </div>
 </transition>
 <transition name="contactModal">
   <div v-if="taistwriteModal" class="black-bg">
     <div class="white-bg">
-      <WriteTaisting :id="whiskey._id" :제품명="whiskey.제품명" />
-      <button type="submit" class="button-menu" @click="taistwriteModal=false">CLOSE</button>
+      <WriteTaisting :id="whiskey._id" :제품명="whiskey.제품명" @closeModal="taistwriteModal=false" />
       </div>
   </div>
 </transition>
@@ -24,12 +22,16 @@
     <p>{{$route.params.id}}</p> -->
       <div class="row gx-2 mt-5">
         <div class="test col-sm-3">
-          <div><WhiskeyPhoto /></div>{{whiskey.테이스팅점수}}
-          <div><WhiskeyStatics :테이스팅점수="whiskey.테이스팅점수" /></div>
-          <button @click="taistwriteModal=true" class="btn btn-outline-dark btn-sm mt-3">맛평가하기</button>
+          <div><WhiskeyPhoto /></div>
+          <div class="boxDiv">
+            <div class="hr-sect"><span class="badge bg-dark">사용자 테이스팅</span></div>
+            <div><WhiskeyStatics :테이스팅점수="calData()" /></div>
+            <button @click="taistwriteModal=true" class="btn btn-outline-dark btn-sm mt-3">맛평가하기</button>
+          </div>
         </div>
         <div class="test col-sm-9">
           <div class="p-3 mt-3"><WhiskeyInfo /></div>
+          <!-- <div  class="hr-sect">코멘트</div> -->
           <div class="p-3 mt-3 mb-5"><WhiskeyComment :whiskey="whiskey" @commentModalOpen="commentwriteModal = true; commentwhiskeyname = $event" /></div>
         </div>
       </div>
@@ -85,6 +87,28 @@ export default {
         console.log(err)
       })
     await this.$nextTick()
+  },
+  methods: {
+    calData () {
+      var tempdata = this.whiskey.테이스팅점수
+      var mapdata = []
+      var a = 0; var b = 0; var c = 0; var d = 0; var e = 0; var f = 0; var g = 0
+      console.log('1: ' + this.whiskey.테이스팅점수)
+      for (var i = 0; i < this.whiskey.테이스팅점수.length; i++) {
+        a = a + parseInt(this.whiskey.테이스팅점수[i][0])
+        b = b + parseInt(this.whiskey.테이스팅점수[i][1])
+        c = c + parseInt(this.whiskey.테이스팅점수[i][2])
+        d = d + parseInt(this.whiskey.테이스팅점수[i][3])
+        e = e + parseInt(this.whiskey.테이스팅점수[i][4])
+        f = f + parseInt(this.whiskey.테이스팅점수[i][5])
+        g = g + parseInt(this.whiskey.테이스팅점수[i][6])
+      }
+
+      tempdata = [a, b, c, d, e, f, g]
+      mapdata = tempdata.map(x => x / this.whiskey.테이스팅점수.length)
+
+      return mapdata
+    }
   }
 
 }
@@ -184,5 +208,14 @@ export default {
 }
 .blank-large {
   height: 200px;
+}
+.boxDiv {
+  padding: 15px 5px 15px 5px;
+  height: fit-content;
+  background: #ffffff;
+  /* background: -webkit-linear-gradient(135deg, #fffcdc, #d9a7c7);  /* Chrome 10-25, Safari 5.1-6 */
+  /* background: linear-gradient(135deg, #fffcdc, #d9a7c7); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.301);
+  border-radius: 5px; /* 5px rounded corners */
 }
 </style>

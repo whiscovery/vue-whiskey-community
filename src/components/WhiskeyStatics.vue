@@ -1,5 +1,4 @@
-
-<PolarArea :chartdata="datas" :options="options" />
+<div><PolarArea :chartdata="datas" :options="options" />{{테이스팅점수}}</div>
 
 <script>
 import { PolarArea } from 'vue-chartjs'
@@ -15,10 +14,11 @@ export default {
   },
   data () {
     return {
+      tempdata: [],
       datas: {
         datasets: [{
           label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3, 22],
+          data: this.테이스팅점수,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -46,7 +46,6 @@ export default {
   },
   mounted () {
     this.renderChart(this.datas, this.options)
-    console.log(this.테이스팅점수)
   }
 
 }

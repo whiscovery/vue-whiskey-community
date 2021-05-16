@@ -50,4 +50,8 @@ export default {
 /* 전환효과 (Fade) */
 .fade-enter-active, .fade-leave-active { transition: opacity 0.5s; }
 .fade-enter, .fade-leave-to { opacity: 0.1; }
+
+.hr-sect{display:flex;flex-basis:100%;align-items:center;color:rgba(46, 45, 45, 0.9);font-size:17px;margin:30px 0}
+.hr-sect:after,.hr-sect:before{content:"";flex-grow:1;background:rgba(33, 33, 33, 0.35);height:1px;font-size:0;line-height:0;margin:0 16px}
+
 </style>

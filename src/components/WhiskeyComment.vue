@@ -1,10 +1,10 @@
 <template>
 <div class="row align-items-center">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button @click="$emit('commentModalOpen', name)" class="btn btn-outline-dark btn-sm mb-2" type="button">코멘트 쓰기</button>
+  <button @click="$emit('commentModalOpen', name)" class="btn btn-warning mb-2" type="button">코멘트 쓰기</button>
 </div>
   <div class="wrapper" v-for="comment,i in comments" :key="i">
-      <div class="speech-bubble">
+      <div class="speech-bubble md-3 mt-3">
           <span class="badge bg-primary name">{{comment.이름}} </span><span class="comment-content"> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}}에서)</small> </span>
       </div>
   </div>

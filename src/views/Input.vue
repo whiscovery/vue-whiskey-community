@@ -40,11 +40,11 @@
       </div>
       </div>
   <div class="form-floating">
-  <textarea v-model="desc" class="form-control" placeholder="Leave a comment here" id="desc" style="height: 120px"></textarea>
+  <textarea v-model="desc" class="form-control" placeholder="Leave a comment here" id="desc" style="height: 210px"></textarea>
     <label for="desc">정보</label>
   </div>
   <div class="form-floating">
-  <textarea v-model="etc" class="form-control" placeholder="Leave a comment here" id="etc" style="height: 120px"></textarea>
+  <textarea v-model="etc" class="form-control" placeholder="Leave a comment here" id="etc" style="height: 210px"></textarea>
     <label for="etc">기타지식</label>
   </div>
     <div class="col-12">

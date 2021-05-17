@@ -1,6 +1,7 @@
 <template>
 <div>
 <div class="row gx-2 mt-5" v-for="data, i in datas" :key="i">
+  <div class="hr-sect-bold"><button type="button" class="btn btn-lg btn-warning">[{{data.위스키}}]</button></div>
   <div class="col-sm-3">
     <div class="hr-sect"><span class="badge bg-dark">제품 사진</span></div>
     <div class="wrapper">
@@ -67,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .info{
   margin-top: 0;
   padding-top: 0;

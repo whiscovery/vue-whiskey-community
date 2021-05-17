@@ -1,6 +1,6 @@
 <template>
 <div class="container mt-5">
-  <h3> 코멘트 입력 {{$route.params.id}}</h3>
+  <h3> 코멘트 입력 {{$route.params.id}} {{whiskeyname}}</h3>
   <form class="row g-3 mt-3">
     <div class="col-md-6 form-floating mb-3">
       <input type="text" v-model="이름" class="form-control" id="이름" placeholder="이름">
@@ -37,11 +37,16 @@ export default {
       이름: '',
       장소: '',
       일시: '',
-      내용: ''
+      내용: '',
+      이메일: '',
+      위스키이름: 'guest'
     }
   },
   components: {
     Datepicker: Datepicker
+  },
+  props: {
+    whiskeyname: String
   },
   methods: {
     async btnModi () {
@@ -52,7 +57,9 @@ export default {
         이름: this.이름,
         장소: this.장소,
         일시: new Intl.DateTimeFormat('en-US').format(this.일시),
-        내용: this.내용
+        내용: this.내용,
+        위스키이름: this.whiskeyname,
+        이메일: this.email
       })
         .then((res) => {
           console.log(res)

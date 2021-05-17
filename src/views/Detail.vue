@@ -3,7 +3,7 @@
 <transition name="contactModal">
   <div v-if="commentwriteModal" class="black-bg">
     <div class="white-bg">
-      <WriteComment @closeModal="commentwriteModal=false" />
+      <WriteComment :whiskeyname="whiskey.제품명" @closeModal="commentwriteModal=false" />
       </div>
   </div>
 </transition>
@@ -20,7 +20,7 @@
       <TaistDetail :whiskey="whiskey" @closeModal="taistdetailModal=false" />
       </div>
   </div>
-</transition>taistdetailModal
+</transition>
   <div class="container overflow-hidden">
       <!-- Modal -->
 
@@ -34,8 +34,8 @@
           <div class="boxDiv">
             <div class="hr-sect"><span class="badge bg-dark">사용자 테이스팅</span></div>
             <div><WhiskeyStatics v-if="whiskey.테이스팅점수 != undefined" :테이스팅점수="calData()" /></div>  <!--undefied 일 때 오류를 잡기 위해 v-if-->
-            <button @click="taistdetailModal=true" class="btn btn-outline-dark btn-sm mt-3">자세히보기</button>
-            <button @click="taistwriteModal=true" class="btn btn-outline-dark btn-sm mt-3">맛평가하기</button>
+            <button @click="taistdetailModal=true" class="btn btn-info btn-sm mt-3">자세히보기</button>
+            <button @click="taistwriteModal=true" class="btn btn-warning btn-sm mt-3 ms-2">맛평가하기</button>
           </div>
         </div>
         <div class="test col-sm-9">
@@ -104,7 +104,6 @@ export default {
       var tempdata = this.whiskey.테이스팅점수
       var mapdata = []
       var a = 0; var b = 0; var c = 0; var d = 0; var e = 0; var f = 0; var g = 0
-      console.log('1: ' + this.whiskey.테이스팅점수)
       for (var i = 0; i < this.whiskey.테이스팅점수.length; i++) {
         a = a + parseInt(this.whiskey.테이스팅점수[i][0])
         b = b + parseInt(this.whiskey.테이스팅점수[i][1])

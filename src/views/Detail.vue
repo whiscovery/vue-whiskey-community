@@ -14,6 +14,13 @@
       </div>
   </div>
 </transition>
+<transition name="taistdetailModal">
+  <div v-if="taistdetailModal" class="black-bg">
+    <div class="white-bg">
+      <TaistDetail :whiskey="whiskey" @closeModal="taistdetailModal=false" />
+      </div>
+  </div>
+</transition>taistdetailModal
   <div class="container overflow-hidden">
       <!-- Modal -->
 
@@ -22,17 +29,21 @@
     <p>{{$route.params.id}}</p> -->
       <div class="row gx-2 mt-5">
         <div class="test col-sm-3">
+          <div class="hr-sect"><span class="badge bg-dark">제품 사진</span></div>
           <div><WhiskeyPhoto /></div>
           <div class="boxDiv">
             <div class="hr-sect"><span class="badge bg-dark">사용자 테이스팅</span></div>
-            <div><WhiskeyStatics :테이스팅점수="calData()" /></div>
+            <div><WhiskeyStatics v-if="whiskey.테이스팅점수 != undefined" :테이스팅점수="calData()" /></div>  <!--undefied 일 때 오류를 잡기 위해 v-if-->
+            <button @click="taistdetailModal=true" class="btn btn-outline-dark btn-sm mt-3">자세히보기</button>
             <button @click="taistwriteModal=true" class="btn btn-outline-dark btn-sm mt-3">맛평가하기</button>
           </div>
         </div>
         <div class="test col-sm-9">
+          <div class="hr-sect"><span class="badge bg-dark">Offical Information</span></div>
           <div class="p-3 mt-3"><WhiskeyInfo /></div>
           <!-- <div  class="hr-sect">코멘트</div> -->
-          <div class="p-3 mt-3 mb-5"><WhiskeyComment :whiskey="whiskey" @commentModalOpen="commentwriteModal = true; commentwhiskeyname = $event" /></div>
+          <div class="hr-sect"><span class="badge bg-dark">맛본자의 코멘트</span></div>
+          <div class="p-3 mb-5"><WhiskeyComment :whiskey="whiskey" @commentModalOpen="commentwriteModal = true; commentwhiskeyname = $event" /></div>
         </div>
       </div>
       <div class="row gx-2">
@@ -52,6 +63,7 @@ import WhiskeyInfo from '@/components/WhiskeyInfo'
 import WhiskeyComment from '@/components/WhiskeyComment'
 import WriteComment from '@/components/WriteComment'
 import WriteTaisting from '@/components/WriteTaisting'
+import TaistDetail from '@/components/TaistDetail'
 import axios from 'axios'
 
 export default {
@@ -61,7 +73,8 @@ export default {
       whiskey: {},
       commentwhiskeyname: null,
       commentwriteModal: false,
-      taistwriteModal: false
+      taistwriteModal: false,
+      taistdetailModal: false
     }
   },
   components: {
@@ -70,23 +83,21 @@ export default {
     WhiskeyInfo: WhiskeyInfo,
     WhiskeyComment: WhiskeyComment,
     WriteComment: WriteComment,
-    WriteTaisting: WriteTaisting
+    WriteTaisting: WriteTaisting,
+    TaistDetail: TaistDetail
   },
   // created () {
   //   // this.whiskey = this.whiskeys[parseInt(this.$route.params.id) - 1]
   // },,
-  async created () {
+  created () {
     const url = 'http://localhost:4000/whiskey/' + this.$route.params.id
     axios.get(url)
       .then((res) => {
         this.whiskey = res.data
       })
-      .then(() => {
-      })
       .catch((err) => {
         console.log(err)
       })
-    await this.$nextTick()
   },
   methods: {
     calData () {

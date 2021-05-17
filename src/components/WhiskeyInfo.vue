@@ -143,7 +143,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .info{
   margin-top: 0;
   padding-top: 0;

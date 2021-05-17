@@ -3,7 +3,7 @@
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
   <button @click="$emit('commentModalOpen', name)" class="btn btn-outline-dark btn-sm mb-2" type="button">코멘트 쓰기</button>
 </div>
-  <div class="wrapper mb-2" v-for="comment,i in comments" :key="i">
+  <div class="wrapper" v-for="comment,i in comments" :key="i">
       <div class="speech-bubble">
           <span class="badge bg-primary name">{{comment.이름}} </span><span class="comment-content"> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}}에서)</small> </span>
       </div>

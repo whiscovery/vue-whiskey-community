@@ -1,4 +1,4 @@
-<div><PolarArea :chartdata="datas" :options="options" />{{테이스팅점수}}</div>
+<div><PolarArea :chartdata="datas" :options="options" /></div>
 
 <script>
 import { PolarArea } from 'vue-chartjs'

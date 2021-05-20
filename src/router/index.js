@@ -7,11 +7,11 @@ import Study from '../views/Study.vue'
 import MyWorld from '../views/MyWorld.vue'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
+import store from '../store'
 Vue.use(VueRouter)
 
-const requireAuth = () => (from, to, next) => {
-  const isAuthenticated = true
-  if (isAuthenticated) return next()
+const requireAuth = () => (to, from, next) => {
+  if (store.getters.isAuthenticated) return next()
   next('/login?returnPath=myworld')
 }
 
@@ -37,15 +37,15 @@ const routes = [
     component: Study
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
     path: '/myworld',
     name: 'MyWorld',
     component: MyWorld,
     beforeEnter: requireAuth()
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login
   },
   {
     path: '/signup',

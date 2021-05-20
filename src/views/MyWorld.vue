@@ -76,6 +76,7 @@ export default {
       this.user = data.nickname
       })
     .catch(() => {
+          this.$store.dispatch('LOGOUT').then(() => this.$router.push('/'))
     })
   },
   methods: {

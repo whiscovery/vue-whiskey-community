@@ -10,7 +10,6 @@ const enhanceAccessToeken = () => {
   const { accessToken } = localStorage
   if (!accessToken) return
   axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`
-  // axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 }
 enhanceAccessToeken()
 
@@ -18,7 +17,12 @@ export default new Vuex.Store({
   state: {
     accessToken: null
   },
-  getters: {},
+  getters: {
+    isAuthenticated (state) {
+      state.accessToken = state.accessToken || localStorage.accessToken
+      return state.accessToken
+    }
+  },
   mutations: {
     LOGIN (state, { accessToken }) {
       state.accessToken = accessToken
@@ -26,6 +30,7 @@ export default new Vuex.Store({
     },
     LOGOUT (state) {
       state.accessToken = null
+      delete localStorage.accessToken
     }
   },
   actions: {
@@ -34,11 +39,9 @@ export default new Vuex.Store({
         .then(({ data }) => {
           commit('LOGIN', data)
           axios.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`
-          // axios.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`
         })
     },
     LOGOUT ({ commit }) {
-      // axios.defaults.headers.common['Authorization'] = undefined
       axios.defaults.headers.common.Authorization = undefined
       commit('LOGOUT')
     }

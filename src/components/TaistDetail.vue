@@ -35,7 +35,7 @@
 export default {
   name: 'TaistDetail',
   props: {
-    whiskey: Array
+    whiskey: Object
   }
 }
 </script>

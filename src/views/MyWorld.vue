@@ -14,11 +14,15 @@
         <div class="row">
             <div class="col-sm-2 text-left">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">음주 기록</li>
-                    <li class="list-group-item"></li>
+                    <li class="list-group-item"><button @click="getRecord">음주 기록</button></li>
+                    <li class="list-group-item"><button @click="btnLogout">로그 아웃</button></li>
                 </ul>
             </div>
             <div class="col-sm-10">
+                <div>
+                  <label>User Info:</label>
+                  <pre>{{user}}</pre>
+                </div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -61,18 +65,33 @@ export default {
         email: 'rootack@gmail.com',
         password: 'qwer1234'
       },
-      commentwriteModal: false
+      commentwriteModal: false,
+      user: ''
     }
   },
   created () {
-    const url = 'http://localhost:4000/comment/search/' + this.datas.email
-    axios.get(url)
-      .then((res) => {
-        this.comments = res.data
+    axios.get('http://localhost:4000/myworld')
+    .then(({ data }) => {
+      console.log(data)
+      this.user = data.nickname
       })
-      .catch((err) => {
-        console.log(err)
-      })
+    .catch(() => {
+    })
+  },
+  methods: {
+    getRecord () {
+      const url = 'http://localhost:4000/comment/search/' + this.datas.email
+      axios.get(url)
+        .then((res) => {
+          this.comments = res.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    btnLogout () {
+      this.$store.dispatch('LOGOUT').then(() => this.$router.push('/'))
+    }
   }
 
 }

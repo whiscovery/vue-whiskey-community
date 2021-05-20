@@ -78,7 +78,7 @@
               </router-link>
             </li>
             <li v-if="isLogin == false">
-              <router-link to="/Login" class="nav-link text-white">
+              <router-link to="/login" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#login"/></svg>
                 Login
               </router-link>

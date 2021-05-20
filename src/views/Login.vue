@@ -1,18 +1,18 @@
 <template>
 <div class="wrapper mt-5">
     <div class="LoginBox mt-5 p-3">
-    <form>
+    <form @submit.prevent="btnOK(email, password)">
         <h4 class="text-center mt-3">Login</h4>
         <div class="row mb-1 mt-2 p-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3">
+            <input type="email" class="form-control" v-model="email">
             </div>
         </div>
         <div class="row mb-4 p-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3">
+            <input type="password" class="form-control" v-model="password">
             </div>
         </div>
         <div class="row mb-1 p-3">
@@ -28,8 +28,35 @@
 </template>
 
 <script>
+
 export default {
-  name: 'Login'
+  name: 'Login',
+  data () {
+    return {
+      email: '',
+      password: '',
+      msg: ''
+    }
+  },
+  methods: {
+    redirect () {
+        const { search } = window.location
+        console.log(search)
+        const tokens = search.replace(/^\?/, '').split('&')
+        const { returnPath } = tokens.reduce((qs, tkn) => {
+            const pair = tkn.split('=')
+            qs[pair[0]] = decodeURIComponent(pair[1])
+            return qs
+        }, {})
+        console.log(returnPath)
+        this.$router.push(returnPath)
+    },
+    btnOK (email, password) {
+        this.$store.dispatch('LOGIN', { email, password })
+          .then(() => this.redirect())
+          .catch(({ message }) => { this.msg = message })
+      }
+  }
 }
 </script>
 

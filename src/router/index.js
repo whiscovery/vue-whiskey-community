@@ -9,6 +9,12 @@ import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 Vue.use(VueRouter)
 
+const requireAuth = () => (from, to, next) => {
+  const isAuthenticated = true
+  if (isAuthenticated) return next()
+  next('/login?returnPath=myworld')
+}
+
 const routes = [
   {
     path: '/list',
@@ -33,7 +39,8 @@ const routes = [
   {
     path: '/myworld',
     name: 'MyWorld',
-    component: MyWorld
+    component: MyWorld,
+    beforeEnter: requireAuth()
   },
   {
     path: '/login',

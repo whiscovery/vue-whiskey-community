@@ -53,7 +53,7 @@ export default {
       const id = this.$route.params.id
       await this.$nextTick()
       axios.post('http://localhost:4000/writecomment', {
-        whiskeyid: id,
+        위스키번호: id,
         이름: this.이름,
         장소: this.장소,
         일시: new Intl.DateTimeFormat('en-US').format(this.일시),

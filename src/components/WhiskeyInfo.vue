@@ -103,7 +103,7 @@ export default {
     async btnModi () {
       await this.$nextTick()
       axios.post('http://localhost:4000/editpost', {
-        _id: this.id,
+        id: this.id,
         제품명: this.name,
         종류: this.category,
         도수: this.degree,
@@ -125,7 +125,7 @@ export default {
     const url = 'http://localhost:4000/whiskey/' + this.$route.params.id
     axios.get(url)
       .then((res) => {
-        this.id = res.data._id
+        this.id = res.data.id
         this.name = res.data.제품명
         this.category = res.data.종류
         this.degree = res.data.도수

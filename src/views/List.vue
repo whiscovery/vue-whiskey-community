@@ -9,7 +9,7 @@
         <option v-for="whiskey, i in whiskeylist" :key="i" :value="whiskey" />
       </datalist> -->
 
-        <div class="col" v-for="whiskey in filteredWhiskey" :key="whiskey._id">
+        <div class="col" v-for="whiskey in filteredWhiskey" :key="whiskey.id">
           <Listitem :whiskey="whiskey" />
         </div>
 
@@ -36,6 +36,7 @@ export default {
   created () {
     axios.get('http://localhost:4000/whiskey')
       .then((res) => {
+        console.log(res.data)
         this.whiskeys = res.data
       })
       .catch((err) => {

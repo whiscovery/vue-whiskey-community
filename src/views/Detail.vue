@@ -10,7 +10,7 @@
 <transition name="contactModal">
   <div v-if="taistwriteModal" class="black-bg">
     <div class="white-bg">
-      <WriteTaisting :id="whiskey._id" :제품명="whiskey.제품명" @closeModal="taistwriteModal=false" />
+      <WriteTaisting :id="whiskey.id" :제품명="whiskey.제품명" @closeModal="taistwriteModal=false" />
       </div>
   </div>
 </transition>

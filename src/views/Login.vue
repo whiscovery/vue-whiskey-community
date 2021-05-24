@@ -39,20 +39,20 @@ export default {
     }
   },
   methods: {
-      redirect () {
-        const { search } = window.location
-        const tokens = search.replace(/^\?/, '').split('&')
-        const { returnPath } = tokens.reduce((qs, tkn) => {
-          const pair = tkn.split('=')
-          qs[pair[0]] = decodeURIComponent(pair[1])
-          return qs
-        }, {})
-        console.log(returnPath)
-        this.$router.push(returnPath)
-        },
+      // redirect () {
+      //   const { search } = window.location
+      //   const tokens = search.replace(/^\?/, '').split('&')
+      //   const { returnPath } = tokens.reduce((qs, tkn) => {
+      //     const pair = tkn.split('=')
+      //     qs[pair[0]] = decodeURIComponent(pair[1])
+      //     return qs
+      //   }, {})
+      //   console.log(returnPath)
+      //   this.$router.push(returnPath)
+      //   },
         btnOK (email, password) {
             this.$store.dispatch('LOGIN', { email, password })
-            .then(() => this.redirect())
+            .then()
             .catch(({ message }) => { this.msg = message })
         }
     }

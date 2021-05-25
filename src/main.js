@@ -4,6 +4,10 @@ import router from './router'
 import store from './store'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import VueCookies from 'vue-cookies'
+
+Vue.use(VueCookies)
+Vue.$cookies.config('7d')
 
 Vue.config.productionTip = false
 

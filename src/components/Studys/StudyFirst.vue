@@ -1,6 +1,7 @@
 <template>
 <div>
-<div class="row gx-2 mt-5" v-for="data, i in datas" :key="i">
+  <input class="form-control" v-model="whiskeysearch" placeholder="위스키 이름 검색">
+<div class="row gx-2 mt-5" v-for="data, i in filteredWhiskey" :key="i">
   <div class="hr-sect-bold"><button type="button" class="btn btn-lg btn-warning">[{{data.위스키}}]</button></div>
   <div class="col-sm-3">
     <div class="hr-sect"><span class="badge bg-dark">제품 사진</span></div>
@@ -35,7 +36,8 @@ export default {
   data () {
     return {
       datas: [],
-      임시배열: []
+      임시배열: [],
+      whiskeysearch: ''
     }
   },
   async created () {
@@ -64,6 +66,14 @@ export default {
         console.log(err)
       })
     await this.$nextTick()
+  },
+  computed: {
+    // 위스키 정보 데이터 중 '제품명' 필드에 검색어가 포함되어 있는지 확인 후 참이면 반환
+    filteredWhiskey () {
+      return this.datas.filter((data) => {
+        return data.위스키.toUpperCase().includes(this.whiskeysearch.toUpperCase())
+      })
+    }
   }
 }
 </script>

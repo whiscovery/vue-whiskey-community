@@ -52,7 +52,7 @@
     <div class="taisting-desc">- 보리, 시리얼, 비스킷, 곡물, 건조된 볏짚, 익힌 야채, 곡물 껍질, 구운 토피, 구운 커피, 감초, 빵, 이스트</div>
   </div>
   <div style="text-align: center">
-  <button class="button-menu" type="submit" @click="btnOK">테이스팅하기</button><button type="submit" class="button-menu ms-3" @click="$emit('closeModal')">닫기</button>
+  <button class="button-menu" type="submit" @click.prevent="btnOK">테이스팅하기</button><button type="submit" class="button-menu ms-3" @click="$emit('closeModal')">닫기</button>
   </div>
     </form>
 </div>

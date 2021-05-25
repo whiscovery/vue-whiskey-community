@@ -19,7 +19,7 @@
     <label class="label" for="코멘트">코멘트</label>
   </div>
   <div class="btnmodi">
-    <button @click="btnModi" type="submit" class="btn btn-warning mt-3">코멘트 입력</button><button @click="$emit('closeModal')" type="submit" class="btn btn-success ms-3 mt-3">창닫기</button>
+    <button @click.prevent="btnModi" type="submit" class="btn btn-warning mt-3">코멘트 입력</button><button @click="$emit('closeModal')" type="submit" class="btn btn-success ms-3 mt-3">창닫기</button>
   </div>
 
   </form>

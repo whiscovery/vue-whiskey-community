@@ -30,6 +30,7 @@ export default {
 body{
   margin: 0px;
   padding: 0px;
+  background: #fff;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -38,6 +39,7 @@ body{
   text-align: center;
   color: #2c3e50;
   margin: 0px;
+  background: #fff;
 }
 .header{
   margin: 0px;

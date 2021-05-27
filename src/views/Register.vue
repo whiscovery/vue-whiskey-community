@@ -1,34 +1,36 @@
 <template>
 <div class="wrapper mt-5">
     <div class="LoginBox mt-5 p-3">
-    <form>
+    <form @submit.prevent="registerUser">
         <h4 class="text-center mt-3">가입하기</h4>
         <div class="row mb-1 mt-2 p-3">
             <label for="email" class="col-sm-3 col-form-label">Email</label>
             <div class="col-sm-9">
-            <input type="email" class="form-control" id="email">
+            <input type="email" class="form-control" id="email" v-model="email">
             </div>
         </div>
         <div class="row mb-1 mt-2 p-3">
-            <label for="nickname" class="col-sm-3 col-form-label">닉네임</label>
+            <label for="nick" class="col-sm-3 col-form-label">닉네임</label>
             <div class="col-sm-9">
-            <input type="email" class="form-control" id="nickname">
+            <input type="text" class="form-control" id="nick" v-model="nick">
             </div>
         </div>
         <div class="row mb-1 p-3">
             <label for="password" class="col-sm-3 col-form-label">암호</label>
             <div class="col-sm-9">
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control" id="password" v-model="password">
             </div>
         </div>
         <div class="row mb-4 p-3">
-            <label for="repassword" class="col-sm-3 col-form-label">암호재입력</label>
+            <label for="confirm_password" class="col-sm-3 col-form-label">암호재입력</label>
             <div class="col-sm-9">
-            <input type="password" class="form-control" id="repassword">
+            <input type="password" class="form-control" id="confirm_password" v-model="confirm_password">
             </div>
         </div>
         <div class="row mb-4 p-3">
-            <button type="submit" class="btn btn-primary">가입하기</button>
+            <button class="btn btn-primary">가입하기</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <router-link to="/login" class="card-link">Already have an account?</router-link>
         </div>
     </form>
     </div>
@@ -37,8 +39,38 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'Register'
+  name: 'Register',
+  data () {
+      return {
+        email: '',
+        nick: '',
+        password: '',
+        confirm_password: '',
+        checknick: true,
+        checkemail: true
+      }
+  },
+  methods: {
+      ...mapActions(['register']),
+      registerUser () {
+          const user = {
+              nick: this.nick,
+              password: this.password,
+              confirm_password: this.confirm_password,
+              email: this.email,
+              checknick: this.checknick,
+              checkemail: this.checkemail
+          }
+          this.register(user).then(res => {
+              if (res.data.success) {
+                  this.$router.push('login')
+              }
+          })
+      }
+  }
 }
 </script>
 

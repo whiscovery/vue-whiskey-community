@@ -4,12 +4,18 @@ import router from './router'
 import store from './store'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import VueCookies from 'vue-cookies'
-
-Vue.use(VueCookies)
-Vue.$cookies.config('7d')
+import axios from 'axios'
 
 Vue.config.productionTip = false
+
+// Setting up default vue's http modules for api calls
+Vue.prototype.$http = axios
+// Load the token from the localStorage
+const token = localStorage.getItem('token')
+// Is there is any token then we will simply append default axios authorization headers
+if (token) {
+  Vue.prototype.$http.defaults.headers.common.Authorization = token
+}
 
 new Vue({
   router,

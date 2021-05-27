@@ -6,14 +6,9 @@ import Detail from '../views/Detail.vue'
 import Study from '../views/Study.vue'
 import MyWorld from '../views/MyWorld.vue'
 import Login from '../views/Login.vue'
-import SignUp from '../views/SignUp.vue'
+import Register from '../views/Register.vue'
 import store from '../store'
 Vue.use(VueRouter)
-
-const requireAuth = () => (to, from, next) => {
-  if (store.getters.isAuthenticated) return next()
-  next('/login?returnPath=myworld')
-}
 
 const routes = [
   {
@@ -44,18 +39,26 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      requiresGuest: true
+    }
   },
   {
     path: '/myworld',
     name: 'MyWorld',
     component: MyWorld,
-    beforeEnter: requireAuth()
+    meta: {
+      requiresAuth: true
+    }
   },
   {
-    path: '/signup',
-    name: 'SignUp',
-    component: SignUp
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: {
+      requiresGuest: true
+    }
   }
 ]
 
@@ -63,6 +66,26 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLoggedIn) {
+      // Redirect to the Login Page
+      next('/login')
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresGuest)) {
+    if (store.getters.isLoggedIn) {
+      // Redirect to the Login Page
+      next('/profile')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

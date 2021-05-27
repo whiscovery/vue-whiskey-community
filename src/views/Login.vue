@@ -19,7 +19,7 @@
             <button type="submit" class="btn btn-primary">로그인하기</button>
         </div>
         <div class="row mb-4 p-3">
-            <small>계정이 없다면 <router-link to="/signup">가입</router-link>하세요. 자신의 음주 기록을 확인할 수 있습니다.</small>
+            <small>계정이 없다면 <router-link to="/register">가입</router-link>하세요. 자신의 음주 기록을 확인할 수 있습니다.</small>
         </div>
     </form>
     </div>

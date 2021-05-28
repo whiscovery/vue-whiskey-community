@@ -3,26 +3,22 @@
     <transition name="myModal">
     <div v-if="commentwriteModal" class="black-bg">
         <div class="white-bg">
-        <WriteMyRecord @closeModal="commentwriteModal=false" />
+        <WriteMyRecord :email="user.email" :nick="user.nick" @closeModal="commentwriteModal=false" @getDataAgain="getData;commentwriteModal=false" />
         </div>
     </div>
     </transition>
 
-      <h2 class="mt-5"> 개인기록 </h2>
-      <div class="button-write"><button @click="commentwriteModal=true" class="btn btn-warning">기록하기</button></div>
+      <h2 class="mt-5"> {{user.nick}}'s World </h2>
+      <div class="button-write"><button @click="commentwriteModal=true" class="btn btn-warning">음주 기록하기</button></div>
       <div class="container mt-3">
         <div class="row">
-            <div class="col-sm-2 text-left">
+            <!-- <div class="col-sm-2 text-left">
                 <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><button>프로필</button></li>
                     <li class="list-group-item"><button @click="getRecord">음주 기록</button></li>
-                    <li class="list-group-item"><button @click="btnLogout">로그 아웃</button></li>
                 </ul>
-            </div>
-            <div class="col-sm-10">
-                <div>
-                  <label>User Info:</label>
-                  <pre>{{user}}</pre>
-                </div>
+            </div> -->
+            <div class="col-sm-12">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -50,6 +46,7 @@
 <script>
 import axios from 'axios'
 import WriteMyRecord from '@/components/WriteMyRecord'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'MyWorld',
@@ -60,41 +57,44 @@ export default {
     return {
       totals: [],
       comments: [],
-      datas: {
-        nickname: '진욱',
-        email: 'rootack@gmail.com',
-        password: 'qwer1234'
-      },
-      commentwriteModal: false,
-      user: ''
+      commentwriteModal: false
+    }
+  },
+  computed: mapGetters(['user']),
+  methods: {
+    ...mapActions(['getProfile']),
+    getData () {
+      console.log(this.user.email)
+    // const url = 'http://localhost:4000/comment/search/' + this.user.email
+    // axios.get(url)
+    //     .then((res) => {
+    //       this.comments = res.data
+    //       if (res) {
+    //         this.$router.push('/myworld').catch(() => {})
+    //         this.commentwriteModal = false
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
     }
   },
   created () {
-    axios.get('http://localhost:4000/myworld')
-    .then(({ data }) => {
-      console.log(data)
-      this.user = data.nickname
-      })
-    .catch(() => {
-          this.$store.dispatch('LOGOUT').then(() => this.$router.push('/'))
-    })
+    this.getProfile()
   },
-  methods: {
-    getRecord () {
-      const url = 'http://localhost:4000/comment/search/' + this.datas.email
-      axios.get(url)
+  mounted () {
+    const url = 'http://localhost:4000/comment/search/' + this.user.email
+    axios.get(url)
         .then((res) => {
           this.comments = res.data
+          if (res) {
+            this.$router.push('/myworld').catch(() => {})
+          }
         })
         .catch((err) => {
           console.log(err)
         })
-    },
-    btnLogout () {
-      this.$store.dispatch('LOGOUT').then(() => this.$router.push('/'))
-    }
   }
-
 }
 </script>
 

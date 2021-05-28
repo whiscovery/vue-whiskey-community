@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper mt-5">
     <div class="LoginBox mt-5 p-3">
-    <form @submit.prevent="btnOK(email, password)">
+    <form @submit.prevent="loginUser">
         <h4 class="text-center mt-3">Login</h4>
         <div class="row mb-1 mt-2 p-3">
             <label for="email" class="col-sm-2 col-form-label">Email</label>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-
+import { mapActions } from 'vuex'
 export default {
   name: 'Login',
   data () {
@@ -39,23 +39,23 @@ export default {
     }
   },
   methods: {
-      // redirect () {
-      //   const { search } = window.location
-      //   const tokens = search.replace(/^\?/, '').split('&')
-      //   const { returnPath } = tokens.reduce((qs, tkn) => {
-      //     const pair = tkn.split('=')
-      //     qs[pair[0]] = decodeURIComponent(pair[1])
-      //     return qs
-      //   }, {})
-      //   console.log(returnPath)
-      //   this.$router.push(returnPath)
-      //   },
-        btnOK (email, password) {
-            this.$store.dispatch('LOGIN', { email, password })
-            .then()
-            .catch(({ message }) => { this.msg = message })
-        }
+    ...mapActions(['login']),
+    loginUser () {
+      const user = {
+        email: this.email,
+        password: this.password
+      }
+      this.login(user)
+        .then(res => {
+          if (res.data.success) {
+            this.$router.push('/myworld')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
+  }
 }
 </script>
 

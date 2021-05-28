@@ -3,7 +3,11 @@
   <div>Recrod</div>
   <form class="row g-3 mt-3">
     <div class="col-md-6 form-floating mb-3">
-      <input type="text" v-model="마신술" class="form-control" id="이름" placeholder="이름">
+      <input type="text" v-model="nick" class="form-control" id="이름" placeholder="이름">
+      <label class="label" for="이름">이름</label>
+    </div>
+    <div class="col-md-6 form-floating mb-3">
+      <input type="text" v-model="마신술" class="form-control" id="마신술" placeholder="이름">
       <label class="label" for="이름">마신술</label>
     </div>
     <div class="col-md-3 form-floating mb-3">
@@ -19,7 +23,7 @@
     <label class="label" for="코멘트">음주 기록</label>
   </div>
   <div class="btnmodi">
-    <button type="submit" class="btn btn-warning mt-3">코멘트 입력</button><button @click="$emit('closeModal')" type="submit" class="btn btn-success ms-3 mt-3">창닫기</button>
+    <button type="submit" @click.prevent="writeRecord" class="btn btn-warning mt-3">코멘트 입력</button><button @click="$emit('closeModal')" type="submit" class="btn btn-success ms-3 mt-3">창닫기</button>
   </div>
 
   </form>
@@ -28,11 +32,47 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
+import axios from 'axios'
 
 export default {
   name: 'WriteMyRecord',
   components: {
     Datepicker: Datepicker
+  },
+  data () {
+    return {
+      마신술: '',
+      장소: '',
+      일시: '',
+      내용: ''
+    }
+  },
+  props: {
+    nick: String,
+    email: String
+  },
+  methods: {
+    async writeRecord () {
+      await this.$nextTick()
+      axios.post('http://localhost:4000/writecomment', {
+        이름: this.nick,
+        위스키이름: this.마신술,
+        장소: this.장소,
+        일시: new Intl.DateTimeFormat('en-US').format(this.일시),
+        내용: this.내용,
+        이메일: this.email
+      })
+        .then((res) => {
+          console.log(res)
+          alert('코멘트 작성 완료')
+          if (res.status === 200) {
+            this.$emit('getDataAgain')
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 }
 </script>

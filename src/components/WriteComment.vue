@@ -59,7 +59,7 @@ export default {
     async btnModi () {
       const id = this.$route.params.id
       await this.$nextTick()
-      axios.post('http://localhost:4000/writecomment', {
+      axios.post('/writecomment', {
         위스키번호: id,
         이름: this.이름,
         장소: this.장소,

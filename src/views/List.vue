@@ -34,7 +34,7 @@ export default {
     Listitem: Listitem
   },
   created () {
-    axios.get('http://localhost:4000/whiskey')
+    axios.get('/whiskey')
       .then((res) => {
         this.whiskeys = res.data
       })

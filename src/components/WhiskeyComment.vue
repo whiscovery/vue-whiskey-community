@@ -23,7 +23,7 @@ export default {
     }
   },
   async created () {
-    const url = 'http://localhost:4000/comment/' + this.$route.params.id
+    const url = '/comment/' + this.$route.params.id
     axios.get(url)
       .then((res) => {
         this.comments = res.data

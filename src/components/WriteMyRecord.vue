@@ -54,7 +54,7 @@ export default {
   methods: {
     async writeRecord () {
       await this.$nextTick()
-      axios.post('http://localhost:4000/writecomment', {
+      axios.post('/writecomment', {
         이름: this.nick,
         위스키이름: this.마신술,
         장소: this.장소,

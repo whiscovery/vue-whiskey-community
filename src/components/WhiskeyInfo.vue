@@ -122,7 +122,7 @@ export default {
     }
   },
   async created () {
-    const url = 'http://localhost:4000/whiskey/' + this.$route.params.id
+    const url = '/whiskey/' + this.$route.params.id
     axios.get(url)
       .then((res) => {
         this.id = res.data.id

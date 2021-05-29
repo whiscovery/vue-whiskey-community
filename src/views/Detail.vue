@@ -90,7 +90,7 @@ export default {
   //   // this.whiskey = this.whiskeys[parseInt(this.$route.params.id) - 1]
   // },,
   created () {
-    const url = 'http://localhost:4000/whiskey/' + this.$route.params.id
+    const url = '/whiskey/' + this.$route.params.id
     axios.get(url)
       .then((res) => {
         this.whiskey = res.data

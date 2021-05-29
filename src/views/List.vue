@@ -36,7 +36,6 @@ export default {
   created () {
     axios.get('http://localhost:4000/whiskey')
       .then((res) => {
-        console.log(res.data)
         this.whiskeys = res.data
       })
       .catch((err) => {

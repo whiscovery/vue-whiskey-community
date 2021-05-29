@@ -2,7 +2,11 @@
 <div class="container mt-5">
   <h3> 코멘트 입력 {{$route.params.id}} {{whiskeyname}}</h3>
   <form class="row g-3 mt-3">
-    <div class="col-md-6 form-floating mb-3">
+    <div class="col-md-6 form-floating mb-3" v-if="user.nick">
+      <input type="text" v-model="이름" class="form-control" id="이름" :placeholder="user.nick">
+      <label class="label" for="이름">{{user.nick}}</label>
+    </div>
+    <div class="col-md-6 form-floating mb-3" v-if="!user.nick">
       <input type="text" v-model="이름" class="form-control" id="이름" placeholder="이름">
       <label class="label" for="이름">이름</label>
     </div>
@@ -29,6 +33,7 @@
 <script>
 import axios from 'axios'
 import Datepicker from 'vuejs-datepicker'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'WriteComment',
@@ -48,7 +53,9 @@ export default {
   props: {
     whiskeyname: String
   },
+  computed: mapGetters(['user']),
   methods: {
+    ...mapActions(['getProfile']),
     async btnModi () {
       const id = this.$route.params.id
       await this.$nextTick()

@@ -9,7 +9,6 @@
     </transition>
 
       <h2 class="mt-5"> {{user.nick}}'s World </h2>
-      <div class="button-write"><button @click="commentwriteModal=true" class="btn btn-warning">음주 기록하기</button></div>
       <div class="container mt-3">
         <div class="row">
             <!-- <div class="col-sm-2 text-left">
@@ -19,24 +18,7 @@
                 </ul>
             </div> -->
             <div class="col-sm-12">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                        <th class="col-sm-1 table-text">마신날</th>
-                        <th class="col-sm-1 table-text">마신곳</th>
-                        <th class="col-sm-3 table-text">술이름</th>
-                        <th class="col-sm-7 table-text">내용</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="comment, i in comments" :key="i" >
-                        <td class="table-text">{{comments[i].일시}}</td>
-                        <td class="table-text">{{comments[i].장소}}</td>
-                        <td class="table-text">{{comments[i].위스키이름}}</td>
-                        <td class="table-text">{{comments[i].내용}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+              <MyRecord :email="user.email" @commentModalOpen="commentwriteModal = true;" />
             </div>
         </div>
         </div>
@@ -46,50 +28,31 @@
 <script>
 import axios from 'axios'
 import WriteMyRecord from '@/components/WriteMyRecord'
+import MyRecord from '@/components/MyRecord'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'MyWorld',
   components: {
-    WriteMyRecord: WriteMyRecord
+    WriteMyRecord: WriteMyRecord,
+    MyRecord: MyRecord
   },
   data () {
     return {
-      totals: [],
       comments: [],
       commentwriteModal: false
     }
   },
   computed: mapGetters(['user']),
   methods: {
-    ...mapActions(['getProfile']),
-    getData () {
-      console.log(this.user.email)
-    // const url = 'http://localhost:4000/comment/search/' + this.user.email
-    // axios.get(url)
-    //     .then((res) => {
-    //       this.comments = res.data
-    //       if (res) {
-    //         this.$router.push('/myworld').catch(() => {})
-    //         this.commentwriteModal = false
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-    }
+    ...mapActions(['getProfile'])
   },
   created () {
     this.getProfile()
-  },
-  mounted () {
     const url = 'http://localhost:4000/comment/search/' + this.user.email
     axios.get(url)
         .then((res) => {
           this.comments = res.data
-          if (res) {
-            this.$router.push('/myworld').catch(() => {})
-          }
         })
         .catch((err) => {
           console.log(err)

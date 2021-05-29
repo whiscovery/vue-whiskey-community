@@ -49,7 +49,6 @@ const actions = {
         commit
     }, userData) {
         try {
-            console.log(userData)
             commit('register_request')
             const res = await axios.post('http://localhost:4000/api/users/register', userData)
             if (res.data.success !== undefined) {

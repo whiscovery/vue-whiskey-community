@@ -66,7 +66,7 @@ export default {
           console.log(res)
           alert('코멘트 작성 완료')
           if (res.status === 200) {
-            this.$emit('getDataAgain')
+            this.$router.push({ name: 'list' }).catch(() => {})
           }
         })
         .catch((err) => {

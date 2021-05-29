@@ -54,7 +54,7 @@ export default {
 <style>
 body {
   background: #20262E;
-  padding: 20px;
+  padding: 2px;
   font-family: Helvetica;
 }
 

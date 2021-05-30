@@ -79,6 +79,8 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 2;
+  top: 0;
+  left: 0;
 }
 .title{
   font-family: 'Exo 2', sans-serif;
@@ -88,6 +90,8 @@ export default {
   top: 50%;
   left: 50%;
   width: 60%;
+  height: 100%;
+  overflow: scroll;
   background: #fff;
   border-radius: 8px;
   padding: 20px;

@@ -12,7 +12,7 @@
     <div class="hr-sect"><span class="badge bg-dark">Offical Information</span></div>
     <div class="p-3 mt-3">
       <div class="info">
-    <div>
+    <div></div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <span class="title">제품명</span><span class="desc">{{data.위스키}}</span></li>

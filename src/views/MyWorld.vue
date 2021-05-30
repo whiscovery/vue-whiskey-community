@@ -50,7 +50,7 @@ export default {
   methods: {
     async getData () {
       await this.$nextTick()
-      const url = 'http://whiscovery.xyz/comment/search/' + this.user.email
+      const url = '/comment/search/' + this.user.email
       await axios.get(url)
           .then((res) => {
             this.comments = res.data

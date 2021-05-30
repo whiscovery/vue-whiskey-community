@@ -66,7 +66,7 @@ export default {
       const date = new Intl.DateTimeFormat('ko-KR', options).format(this.일시)
       console.log(email + '/' + nickname)
       await this.$nextTick()
-      axios.post('http://whiscovery.xyz/writecomment', {
+      axios.post('/writecomment', {
         위스키번호: id,
         이름: nickname,
         장소: this.장소,

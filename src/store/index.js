@@ -25,13 +25,13 @@ export default new Vuex.Store({
   },
   actions: {
     fetchWhiskeys ({ commit }) {
-      axios.get('http://whiscovery.xyz/whiskey')
+      axios.get('/whiskey')
       .then((res) => {
         commit('FETCH_WHISKEYS', res.data)
       })
     },
     fetchMyrecords ({ commit }, payload) {
-      axios.get('http://whiscovery.xyz/comment/search/' + this.email)
+      axios.get('/comment/search/' + this.email)
       .then((res) => {
         commit('FETCH_WHISKEYS', res.data)
       })

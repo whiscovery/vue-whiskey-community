@@ -61,7 +61,7 @@ export default {
       var options = { year: 'numeric', month: '2-digit', day: '2-digit', hour12: false }
       const date = new Intl.DateTimeFormat('ko-KR', options).format(this.일시)
       await this.$nextTick()
-      axios.post('http://whiscovery.xyz/writecomment', {
+      axios.post('/writecomment', {
         이름: this.nick,
         위스키이름: this.마신술,
         장소: this.장소,

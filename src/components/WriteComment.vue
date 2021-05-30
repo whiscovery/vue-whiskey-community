@@ -1,6 +1,6 @@
 <template>
 <div class="container mt-5">
-  <h3> 코멘트 입력 {{$route.params.id}} {{whiskeyname}}</h3>
+  <h3>{{whiskeyname}}</h3>
   <form class="row g-3 mt-3">
     <div class="col-md-6 form-floating mb-3" v-if="user.nick">
       <input type="text" v-model="이름" class="form-control" id="이름" :placeholder="user.nick">
@@ -59,7 +59,7 @@ export default {
     async btnModi () {
       const id = this.$route.params.id
       await this.$nextTick()
-      axios.post('/writecomment', {
+      axios.post('http://whiscovery.xyz/writecomment', {
         위스키번호: id,
         이름: this.이름,
         장소: this.장소,

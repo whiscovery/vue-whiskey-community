@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     btnOK () {
-      axios.post('/writepost', {
+      axios.post('http://whiscovery.xyz/writepost', {
         제품명: this.name,
         종류: this.category,
         도수: this.degree,

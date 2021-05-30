@@ -1,6 +1,6 @@
 <template>
 <div>
-   <h4 class="mt-3 mb-5">{{제품명}}이 어떠셨나요?</h4>
+   <h4 class="mt-3 mb-3">{{제품명}}이 어떠셨나요?</h4>
   <form class="taist-form">
   <div class="row mb-3">
     <label for="taistingbody" class="col-sm-3 col-form-label taisting-bold">바디감 <span class="badge bg-info">{{taistingbody}}</span></label>
@@ -52,7 +52,7 @@
     <div class="taisting-desc">- 보리, 시리얼, 비스킷, 곡물, 건조된 볏짚, 익힌 야채, 곡물 껍질, 구운 토피, 구운 커피, 감초, 빵, 이스트</div>
   </div>
   <div style="text-align: center">
-  <button class="button-menu" type="submit" @click.prevent="btnOK">테이스팅하기</button><button type="submit" class="button-menu ms-3" @click="$emit('closeModal')">닫기</button>
+  <button class="btn btn-warning mt-3" type="submit" @click.prevent="btnOK">테이스팅하기</button><button type="submit" class="btn btn-success ms-3 mt-3" @click="$emit('closeModal')">닫기</button>
   </div>
     </form>
 </div>
@@ -85,7 +85,7 @@ export default {
         whiskeyid: this.id,
         테이스팅점수: [taistingbody, taisting달콤, taisting피트, taisting스파이스, taisting과일, taisting견과, taisting몰트]
       }
-      axios.post('/writepost/taisting', data)
+      axios.post('http://whiscovery.xyz/writepost/taisting', data)
         .then((res) => {
           alert('테이스팅 점수가 저장되었습니다')
           console.log(res)

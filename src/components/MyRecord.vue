@@ -36,7 +36,7 @@ export default {
         email: String
     },
     async created () {
-        const url = '/comment/search/' + this.email
+        const url = 'http://whiscovery.xyz/comment/search/' + this.email
         axios.get(url)
         .then((res) => {
             this.comments = res.data

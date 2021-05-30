@@ -66,6 +66,7 @@ export default {
           }
           this.register(user).then(res => {
               if (res.data.success) {
+                  alert('가입되셨습니다. 로그인해주세요.')
                   this.$router.push('login')
               }
           })

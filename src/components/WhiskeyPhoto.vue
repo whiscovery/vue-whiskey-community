@@ -19,7 +19,7 @@ export default {
     }
   },
   async created () {
-    const url = '/whiskey/' + this.$route.params.id
+    const url = 'http://whiscovery.xyz/whiskey/' + this.$route.params.id
     axios.get(url)
       .then((res) => {
         this.image = res.data.이미지

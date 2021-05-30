@@ -20,32 +20,33 @@
 
 <script>
 import Listitem from '@/components/Listitem'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'List',
   data () {
     return {
       whiskeysearch: '',
-      whiskeys: []
+      whiskeys: ''
     }
   },
   components: {
     Listitem: Listitem
   },
   created () {
-    axios.get('/whiskey')
-      .then((res) => {
-        this.whiskeys = res.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    // axios.get('/whiskey')
+    //   .then((res) => {
+    //     this.whiskeys = res.data
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+    this.$store.dispatch('fetchWhiskeys')
   },
   computed: {
     // 위스키 정보 데이터 중 '제품명' 필드에 검색어가 포함되어 있는지 확인 후 참이면 반환
     filteredWhiskey () {
-      return this.whiskeys.filter((data) => {
+      return this.$store.state.whiskeys.filter((data) => {
         return data.제품명.toUpperCase().includes(this.whiskeysearch.toUpperCase())
       })
     }

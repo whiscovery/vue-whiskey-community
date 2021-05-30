@@ -46,55 +46,55 @@
   </symbol>
 
 </svg>
-    <div class="px-3 py-2 bg-dark text-white">
+    <div class="py-2 bg-dark text-white">
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
           <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-            Whiskey Diary
+            Whiscovery
           </a>
 
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+          <ul class="nav col-12 col justify-content-center my-md-0 text-small">
 
             <li>
               <router-link to="/list" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
+                <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#grid"/></svg>
                 List
               </router-link>
             </li>
             <li>
               <router-link to="/study" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#study"/></svg>
+                <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#study"/></svg>
                 Study
               </router-link>
             </li>
             <li>
               <router-link to="/input" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
+                <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#speedometer2"/></svg>
                 New
               </router-link>
             </li>
             <li v-if="isLogin == true">
               <router-link to="/myworld" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+                <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#people-circle"/></svg>
                 My World
               </router-link>
             </li>
             <li v-if="!isLoggedIn">
               <router-link to="/login" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#login"/></svg>
+                <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#login"/></svg>
                 Login
               </router-link>
             </li>
             <li v-if="isLoggedIn">
               <router-link to="/myworld" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#myworld"/></svg>
-                Myworld
+                <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#myworld"/></svg>
+                My
               </router-link>
             </li>
             <li v-if="isLoggedIn">
                <a to="/logout" class="nav-link text-white" @click.prevent="logoutUser">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#login"/></svg>
+                <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#login"/></svg>
                 Logout
               </a>
             </li>

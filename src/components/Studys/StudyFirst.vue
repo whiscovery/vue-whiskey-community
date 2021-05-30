@@ -26,7 +26,6 @@
 </div>
       </div></div>
 </div>
-</div>
 </template>
 
 <script>
@@ -63,8 +62,8 @@ export default {
       })
       .then(() => {
       })
+      // eslint-disable-next-line handle-callback-err
       .catch((err) => {
-        console.log(err)
       })
     await this.$nextTick()
   },

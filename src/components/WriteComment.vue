@@ -39,11 +39,11 @@ export default {
   name: 'WriteComment',
   data () {
     return {
-      이름: '',
+      이름: this.user.nick,
       장소: '',
       일시: '',
       내용: '',
-      이메일: '',
+      이메일: this.user.email,
       위스키이름: 'guest'
     }
   },

@@ -90,6 +90,7 @@ export default {
 }
 .desc{
   font-size: 14px;
+  word-break:break-all;
 }
 .wrapper {
   padding: 35px 0px 60px 0px;

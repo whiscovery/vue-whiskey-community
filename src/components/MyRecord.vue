@@ -4,18 +4,15 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                        <th class="col-sm-1 table-text">마신날</th>
-                        <th class="col-sm-1 table-text">마신곳</th>
-                        <th class="col-sm-3 table-text">술이름</th>
-                        <th class="col-sm-7 table-text">내용</th>
+                        <th class="col-sm-2 table-text">마신날</th>
+                        <th class="col-sm-8 table-text">내용</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="comment, i in sortedComments" :key="i" >
-                        <td class="table-text">{{comments[i].일시}}</td>
-                        <td class="table-text">{{comments[i].장소}}</td>
-                        <td class="table-text">{{comments[i].위스키이름}}</td>
-                        <td class="table-text">{{comments[i].내용}}</td>
+                        <td class="table-text"><span class="comment-date">{{comments[i].일시}}</span></td>
+                        <td class="table-text t-left"><span class="comment-title">{{comments[i].위스키이름}}</span><span class="comment-location">(@ {{comments[i].장소}})</span>
+                        <p class="comment-content">{{comments[i].내용}}</p></td>
                         </tr>
                     </tbody>
                 </table>
@@ -60,6 +57,23 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.comment-title {
+    font-size: 14px;
+    text-align: left;
+}
+.comment-date {
+    font-size: 10px;
+}
+.comment-location {
+    font-size: 12px;
+    color:chocolate;
+}
+.comment-content {
+    font-size: 12px;
+    text-align: left;
+}
+.t-left {
+    text-align: left;
+}
 </style>

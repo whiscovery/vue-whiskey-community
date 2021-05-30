@@ -34,6 +34,7 @@
 import Datepicker from 'vuejs-datepicker'
 import axios from 'axios'
 
+import { mapGetters } from 'vuex'
 export default {
   name: 'WriteMyRecord',
   components: {
@@ -51,21 +52,26 @@ export default {
     nick: String,
     email: String
   },
+  computed: mapGetters(['user']),
+  created () {
+    this.$store.dispatch('getProfile')
+  },
   methods: {
     async writeRecord () {
+      var options = { year: 'numeric', month: '2-digit', day: '2-digit', hour12: false }
+      const date = new Intl.DateTimeFormat('ko-KR', options).format(this.일시)
       await this.$nextTick()
       axios.post('http://whiscovery.xyz/writecomment', {
         이름: this.nick,
         위스키이름: this.마신술,
         장소: this.장소,
-        일시: new Intl.DateTimeFormat('en-US').format(this.일시),
+        일시: date,
         내용: this.내용,
         이메일: this.email
       })
         .then((res) => {
-          console.log(res)
-          alert('코멘트 작성 완료')
           if (res.status === 200) {
+            alert('코멘트 작성 완료')
             this.$router.push({ name: 'list' }).catch(() => {})
           }
         })

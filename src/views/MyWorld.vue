@@ -29,7 +29,7 @@
 import axios from 'axios'
 import WriteMyRecord from '@/components/WriteMyRecord'
 import MyRecord from '@/components/MyRecord'
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'MyWorld',
@@ -44,19 +44,24 @@ export default {
     }
   },
   computed: mapGetters(['user']),
-  methods: {
-    ...mapActions(['getProfile'])
-  },
   created () {
-    this.getProfile()
-    const url = 'http://whiscovery.xyz/comment/search/' + this.user.email
-    axios.get(url)
-        .then((res) => {
-          this.comments = res.data
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+    this.$store.dispatch('getProfile')
+  },
+  methods: {
+    async getData () {
+      await this.$nextTick()
+      const url = 'http://whiscovery.xyz/comment/search/' + this.user.email
+      await axios.get(url)
+          .then((res) => {
+            this.comments = res.data
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+    }
+  },
+  mounted () {
+    this.getData()
   }
 }
 </script>

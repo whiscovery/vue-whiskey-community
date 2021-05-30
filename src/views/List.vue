@@ -33,16 +33,6 @@ export default {
   components: {
     Listitem: Listitem
   },
-  created () {
-    // axios.get('/whiskey')
-    //   .then((res) => {
-    //     this.whiskeys = res.data
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
-    this.$store.dispatch('fetchWhiskeys')
-  },
   computed: {
     // 위스키 정보 데이터 중 '제품명' 필드에 검색어가 포함되어 있는지 확인 후 참이면 반환
     filteredWhiskey () {

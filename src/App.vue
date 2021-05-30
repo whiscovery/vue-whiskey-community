@@ -24,6 +24,17 @@ export default {
     }
   },
   computed: {
+  },
+  created () {
+    // axios.get('/whiskey')
+    //   .then((res) => {
+    //     this.whiskeys = res.data
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+    this.$store.dispatch('fetchWhiskeys')
+    this.$store.dispatch('getProfile')
   }
 }
 </script>

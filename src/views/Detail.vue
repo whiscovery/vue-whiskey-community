@@ -28,7 +28,7 @@
 <!-- Modal End -->
     <!-- <h4>Detail</h4>
     <p>{{$route.params.id}}</p> -->
-      <div class="row gx-2 mt-5">
+      <div class="row gx-2 mt-5 mb-5">
         <div class="test col-sm-3">
           <div class="hr-sect"><span class="badge bg-dark">제품 사진</span></div>
           <div><WhiskeyPhoto /></div>
@@ -46,11 +46,6 @@
           <div class="hr-sect"><span class="badge bg-dark">맛본자의 코멘트</span></div>
           <div class="p-3 mb-5"><WhiskeyComment :whiskey="whiskey" @commentModalOpen="commentwriteModal = true; commentwhiskeyname = $event" /></div>
         </div>
-      </div>
-      <div class="row gx-2">
-        <div class="test col-sm"></div>
-        <div class="test col-sm"></div>
-        <div class="test col-sm"></div>
       </div>
   </div>
 </div>

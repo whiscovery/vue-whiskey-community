@@ -48,9 +48,10 @@
 </svg>
     <div class="py-2 bg-dark text-white">
       <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mt-3">
           <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+          <!-- <img src="@/assets/logomain.png" width="50"> -->
+            <svg class="bi me-2" width="45" height="36" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
             Whiscovery
           </a>
 

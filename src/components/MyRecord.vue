@@ -32,16 +32,15 @@ export default {
     props: {
         email: String
     },
-    async created () {
-        const url = 'http://whiscovery.xyz/comment/search/' + this.email
-        axios.get(url)
-        .then((res) => {
+    async mounted () {
+      const url = 'http://whiscovery.xyz/comment/search/' + this.email
+      await axios.get(url)
+          .then((res) => {
             this.comments = res.data
-        })
-        .catch((err) => {
+          })
+          .catch((err) => {
             console.log(err)
-        })
-        await this.$nextTick()
+          })
     },
     computed: {
         // 위스키 정보 데이터 중 '제품명' 필드에 검색어가 포함되어 있는지 확인 후 참이면 반환

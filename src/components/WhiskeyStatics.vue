@@ -54,15 +54,8 @@ export default {
 <style>
 body {
   background: #20262E;
-  padding: 2px;
+  padding: 0px;
   font-family: Helvetica;
-}
-
-#app {
-  background: #fff;
-  border-radius: 4px;
-  padding: 20px;
-  transition: all 0.2s;
 }
 
 li {

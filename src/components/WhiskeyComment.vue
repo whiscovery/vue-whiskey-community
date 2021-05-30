@@ -32,6 +32,11 @@ export default {
         console.log(err)
       })
     await this.$nextTick()
+  },
+  methods: {
+    btnCommentModal () {
+      this.$store.commit('COMMENTMODALOPEN')
+    }
   }
 }
 </script>

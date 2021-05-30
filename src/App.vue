@@ -3,9 +3,8 @@
     <div id="header">
       <Header />
     </div>
-    <transition name="fade">
       <router-view :whiskeys="whiskeys" />
-    </transition>
+
   </div>
 </template>
 
@@ -23,6 +22,8 @@ export default {
     return {
       whiskeys: []
     }
+  },
+  computed: {
   }
 }
 </script>
@@ -31,6 +32,8 @@ body{
   margin: 0px;
   padding: 0px;
   background: #fff;
+  height: 100%;
+  overflow: auto;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -41,6 +44,8 @@ body{
   margin: 0px;
   padding: 0px;
   background: #fff;
+  height: 100%;
+  overflow: auto;
 }
 .header{
   margin: 0px;
@@ -57,6 +62,82 @@ body{
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+.black-bg {
+  width : 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  position: fixed;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+.title{
+  font-family: 'Exo 2', sans-serif;
+}
+.white-bg {
+  color: #000;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  z-index: 3;
+  font-weight: 800;
+}
+.white-bg .contact-us-title{
+  width:100%;
+  color: #fff;
+  background: darkslateblue;
+}
+@media(max-width: 720px){
+  .black-bg {
+    width : 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+  .title{
+    font-family: 'Exo 2', sans-serif;
+  }
+  .white-bg {
+    color: #000;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 3;
+    font-size: 14px;
+  }
+}
+.contactModal-enter-from {
+    opacity: 0;
+}
+.contactModal-enter-active {
+    transition: all 1s;
+}
+.contactModal-enter-to{
+    opacity: 1;
+}
+.contactModal-leave-from {
+  opacity: 1;
+}
+.contactModal-leave-active {
+  transition: all 1s;
+}
+.contactModal-leave-to{
+  opacity: 0;
+}
+
 /* 전환효과 (Fade) */
 .fade-enter-active, .fade-leave-active { transition: opacity 0.5s; }
 .fade-enter, .fade-leave-to { opacity: 0.1; }

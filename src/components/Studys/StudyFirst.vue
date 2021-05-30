@@ -15,7 +15,8 @@
     <div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <span class="title">제품명</span><span class="desc">{{data.위스키}}</span> <span class="title ms-5">작성자</span><span class="desc">{{data.작성자}}</span></li>
+          <span class="title">제품명</span><span class="desc">{{data.위스키}}</span></li>
+          <li class="list-group-item"> <span class="title ms-5">작성자</span><span class="desc">{{data.작성자}}</span></li>
         <li class="list-group-item"><span class="title">종류/지역</span> <span class="desc">{{data.구분}}/{{data.지역}}</span></li>
         <li class="list-group-item"><span class="title">테이스팅</span> <br /><span class="desc" v-html="data.테이스팅노트.replaceAll('\n','<br />')"></span></li>
         <li class="list-group-item"><span class="title">설명</span> <br /><span class="desc" v-html="data.설명.replaceAll('\n','<br />')"></span></li>

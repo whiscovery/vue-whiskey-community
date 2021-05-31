@@ -36,6 +36,7 @@
 import axios from 'axios'
 import Datepicker from 'vuejs-datepicker'
 import { mapActions, mapGetters } from 'vuex'
+import { baseurl } from '@/config/index'
 
 export default {
   name: 'WriteComment',
@@ -64,9 +65,9 @@ export default {
       const email = (this.user.email) ? this.user.email : this.이메일
       const nickname = (this.user.nick) ? this.user.nick : this.이름
       const date = new Intl.DateTimeFormat('ko-KR', options).format(this.일시)
-      console.log(email + '/' + nickname)
       await this.$nextTick()
-      axios.post('/writecomment', {
+      const url = baseurl + '/writecomment'
+      axios.post(url, {
         위스키번호: id,
         이름: nickname,
         장소: this.장소,

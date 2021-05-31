@@ -44,7 +44,7 @@
           <div class="p-3 mt-3"><WhiskeyInfo /></div>
           <!-- <div  class="hr-sect">코멘트</div> -->
           <div class="hr-sect"><span class="badge bg-dark">맛본자의 코멘트</span></div>
-          <div class="p-3 mb-5"><WhiskeyComment :whiskey="whiskey" @commentModalOpen="commentwriteModal = true; commentwhiskeyname = $event" /></div>
+          <div class="p-3 mb-5"><WhiskeyComment @delete="deleteComment" :whiskey="whiskey" @commentModalOpen="commentwriteModal = true; commentwhiskeyname = $event" /></div>
         </div>
       </div>
   </div>
@@ -61,6 +61,7 @@ import WriteComment from '@/components/WriteComment'
 import WriteTaisting from '@/components/WriteTaisting'
 import TaistDetail from '@/components/TaistDetail'
 import axios from 'axios'
+import { baseurl } from '@/config/index'
 
 export default {
   name: 'List',
@@ -86,7 +87,7 @@ export default {
   //   // this.whiskey = this.whiskeys[parseInt(this.$route.params.id) - 1]
   // },,
   created () {
-    const url = '/whiskey/' + this.$route.params.id
+    const url = baseurl + '/whiskey/' + this.$route.params.id
     axios.get(url)
       .then((res) => {
         this.whiskey = res.data
@@ -96,6 +97,23 @@ export default {
       })
   },
   methods: {
+    deleteComment (value) {
+      const url = baseurl + '/comment/delete/' + value
+      if (confirm('코멘트를 삭제하시겠습니까?')) {
+        axios.delete(url)
+        .then((res) => {
+          if (res.status === 200) {
+            if (confirm('삭제되었습니다.')) {
+              this.msg = res.statusText
+              console.log(this.msg)
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      }
+    },
     calData () {
       var tempdata = this.whiskey.테이스팅점수
       var mapdata = []

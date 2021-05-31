@@ -48,21 +48,7 @@ export default {
       this.$store.commit('COMMENTMODALOPEN')
     },
     delComment (value) {
-      const url = baseurl + '/comment/delete/' + value
-      if (confirm('코멘트를 삭제하시겠습니까?')) {
-        axios.post(url)
-        .then((res) => {
-          if (res.status === 200) {
-            if (confirm('삭제되었습니다.')) {
-              this.msg = res.statusText
-              console.log(this.msg)
-            }
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      }
+      this.$emit('delete', value)
     }
   }
 }

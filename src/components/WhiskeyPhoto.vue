@@ -39,9 +39,11 @@ export default {
   margin: 0px auto;
 }
 .photo {
+  display: block;
   margin: 0px auto;
 }
 .photo-img {
+  display: block;
   width: 100%;
   margin: 0px auto;
 }
@@ -51,10 +53,12 @@ export default {
   margin: 0px auto;
 }
 .photo {
+  display: block;
   margin: 0px auto;
 }
 .photo-img {
   width: 60%;
+  display: block;
   margin: 0px auto;
 }
 }

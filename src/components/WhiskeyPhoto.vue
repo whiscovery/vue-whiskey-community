@@ -42,4 +42,10 @@ export default {
   width: 100%;
   margin: 0px auto;
 }
+@media(max-width: 720px){
+.photo-img {
+  width: 80%;
+  margin: 0px auto;
+}
+}
 </style>

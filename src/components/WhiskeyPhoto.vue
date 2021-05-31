@@ -43,6 +43,10 @@ export default {
   margin: 0px auto;
 }
 @media(max-width: 720px){
+  .wrapper {
+  padding: 35px 0px 60px 0px;
+  margin: 0px auto;
+}
 .photo-img {
   width: 80%;
   margin: 0px auto;

@@ -3,7 +3,7 @@
     <div id="header">
       <Header />
     </div>
-      <router-view :whiskeys="whiskeys" />
+      <router-view :key="$route.fullPath" :whiskeys="whiskeys" />
 
   </div>
 </template>

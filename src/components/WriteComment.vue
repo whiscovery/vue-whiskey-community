@@ -25,7 +25,7 @@
     <label class="label" for="코멘트">코멘트</label>
   </div>
   <div class="btnmodi">
-    <button @click="btnModi" type="submit" class="btn btn-warning mt-3">코멘트 입력</button><button @click="$emit('closeModal')" type="submit" class="btn btn-success ms-3 mt-3">창닫기</button>
+    <button @click.prevent="btnModi" type="submit" class="btn btn-warning mt-3">코멘트 입력</button><button @click="$emit('closeModal')" type="submit" class="btn btn-success ms-3 mt-3">창닫기</button>
   </div>
 
   </form>
@@ -77,10 +77,8 @@ export default {
         이메일: email
       })
         .then((res) => {
-          console.log(res)
           if (res.status === 200) {
             alert('코멘트 작성 완료')
-            this.$router.push({ name: 'Detail', params: { id: this.$route.params.id } }).catch(() => {})
           }
         })
         .catch((err) => {

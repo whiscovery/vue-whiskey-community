@@ -38,17 +38,23 @@ export default {
   padding: 35px 0px 60px 0px;
   margin: 0px auto;
 }
+.photo {
+  margin: 0px auto;
+}
 .photo-img {
   width: 100%;
   margin: 0px auto;
 }
 @media(max-width: 720px){
-  .wrapper {
+.wrapper {
   padding: 35px 0px 60px 0px;
   margin: 0px auto;
 }
+.photo {
+  margin: 0px auto;
+}
 .photo-img {
-  width: 80%;
+  width: 60%;
   margin: 0px auto;
 }
 }

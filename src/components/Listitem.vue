@@ -1,9 +1,9 @@
 <template>
 <div class="card shadow-sm">
-            <router-link class="text-link" :to="{ name: 'Detail', params: { id: whiskey.id }}"><img :src="whiskey.이미지" class="thumbnail-whiskey"></router-link>
+            <router-link class="text-link" :to="{ name: 'Detail', params: { postId: whiskey.id }}"><img :src="whiskey.이미지" class="thumbnail-whiskey"></router-link>
 
             <div class="card-body">
-              <p class="card-text text-truncate"><router-link class="text-link" :to="{ name: 'Detail', params: { id: whiskey.id }}">{{whiskey.제품명}}</router-link></p>
+              <p class="card-text text-truncate"><router-link class="text-link" :to="{ name: 'Detail', params: { postId: whiskey.id }}">{{whiskey.제품명}}</router-link></p>
               <div class="d-flex justify-content-between align-items-center">
                 <small class="list-small">{{whiskey.종류}}</small>
               </div>

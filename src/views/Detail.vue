@@ -3,7 +3,7 @@
 <transition name="contactModal">
   <div v-if="commentwriteModal" class="black-bg">
     <div class="white-bg">
-      <WriteComment :whiskeyname="whiskey.제품명" @closeModal="commentwriteModal=false" />
+      <WriteComment :whiskeyid="whiskey.id" :whiskeyname="whiskey.제품명" @submit="onCommentSubmit" @closeModal="commentwriteModal=false" />
       </div>
   </div>
 </transition>
@@ -28,10 +28,10 @@
 <!-- Modal End -->
     <!-- <h4>Detail</h4>
     <p>{{$route.params.id}}</p> -->
-      <div class="row gx-2 mt-5 mb-5">
+      <div class="row gx-2 mt-5 mb-5" v-if="whiskey">
         <div class="test col-sm-3">
           <div class="hr-sect"><span class="badge bg-dark">제품 사진</span></div>
-          <div><WhiskeyPhoto /></div>
+          <div><WhiskeyPhoto :photo="whiskey.이미지"/></div>
           <div class="boxDiv">
             <div class="hr-sect"><span class="badge bg-dark">사용자 테이스팅</span></div>
             <div><WhiskeyStatics v-if="whiskey.테이스팅점수 != undefined" :테이스팅점수="calData()" /></div>  <!--undefied 일 때 오류를 잡기 위해 v-if-->
@@ -41,12 +41,16 @@
         </div>
         <div class="test col-sm-9">
           <div class="hr-sect"><span class="badge bg-dark">Offical Information</span></div>
-          <div class="p-3 mt-3"><WhiskeyInfo /></div>
+          <div class="p-3 mt-3"><WhiskeyInfo :whiskey="whiskey" /></div>
           <!-- <div  class="hr-sect">코멘트</div> -->
           <div class="hr-sect"><span class="badge bg-dark">맛본자의 코멘트</span></div>
-          <div class="p-3 mb-5"><WhiskeyComment @delete="deleteComment" :whiskey="whiskey" @commentModalOpen="commentwriteModal = true; commentwhiskeyname = $event" /></div>
+          <div class="p-3 mb-5">
+            <WhiskeyComment v-if="comments" @delete="deleteComment" :comments="comments" @commentModalOpen="commentwriteModal = true; commentwhiskeyname = $event" />
+            <p v-else>코멘트 불러오는 중</p>
+            </div>
         </div>
       </div>
+      <div v-else>게시물 불러오는 중</div>
   </div>
 </div>
 </template>
@@ -62,12 +66,12 @@ import WriteTaisting from '@/components/WriteTaisting'
 import TaistDetail from '@/components/TaistDetail'
 import axios from 'axios'
 import { baseurl } from '@/config/index'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'List',
   data () {
     return {
-      whiskey: {},
       commentwhiskeyname: null,
       commentwriteModal: false,
       taistwriteModal: false,
@@ -83,31 +87,52 @@ export default {
     WriteTaisting: WriteTaisting,
     TaistDetail: TaistDetail
   },
-  // created () {
-  //   // this.whiskey = this.whiskeys[parseInt(this.$route.params.id) - 1]
-  // },,
+  props: {
+    postId: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    ...mapState(['whiskey', 'comments'])
+  },
   created () {
-    const url = baseurl + '/whiskey/' + this.$route.params.id
-    axios.get(url)
-      .then((res) => {
-        this.whiskey = res.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.fetchWhiskey(this.postId)
+    .catch(err => {
+      alert(err.response.data.msg)
+      this.$router.back()
+    })
+    this.fetchComment(this.postId)
+    // const url = baseurl + '/whiskey/' + this.$route.params.id
+    // axios.get(url)
+    //   .then((res) => {
+    //     this.whiskey = res.data
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
   },
   methods: {
+    onCommentSubmit (inputComment) {
+      console.log(inputComment)
+      this.writeComment(inputComment)
+      .then(() => {
+        alert('댓글이 작성되었습니다')
+      })
+      .catch(err => {
+        alert(err.response.data.msg)
+      })
+    },
     deleteComment (value) {
-      const url = baseurl + '/comment/delete/' + value
       if (confirm('코멘트를 삭제하시겠습니까?')) {
-        axios.delete(url)
+        axios.delete(baseurl + `/comment/delete/${value}`)
         .then((res) => {
-          if (res.status === 200) {
-            if (confirm('삭제되었습니다.')) {
-              this.msg = res.statusText
-              console.log(this.msg)
-            }
-          }
+          console.log(res)
+          // alert("코멘트가 삭제되었습니다.")
+          // this.$router.push({
+          //   name: 'Detail',
+          //   params: { id: res.data }
+          // })
         })
         .catch((err) => {
           console.log(err)
@@ -132,7 +157,8 @@ export default {
       mapdata = tempdata.map(x => x / this.whiskey.테이스팅점수.length)
 
       return mapdata
-    }
+    },
+    ...mapActions(['fetchWhiskey', 'fetchComment', 'writeComment'])
   }
 
 }

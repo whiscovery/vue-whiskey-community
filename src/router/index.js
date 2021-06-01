@@ -27,9 +27,10 @@ const routes = [
     component: Input
   },
   {
-    path: '/detail/:id',
+    path: '/detail/:postId',
     name: 'Detail',
-    component: Detail
+    component: Detail,
+    props: true
   },
   {
     path: '/study',

@@ -2,12 +2,11 @@
 <div class="info" @dblclick="modistate = true">
   <ul class="list-group list-group-flush" v-if="modistate == false">
     <li class="list-group-item">
-      <span class="title">제품명</span><span class="desc">{{name}}</span></li>
-    <li class="list-group-item"><span class="title">종류/도수</span> <span class="desc">{{category}} / {{degree}}%</span></li>
-    <li class="list-group-item"><span class="title">가격대</span> <span class="desc">{{price}}</span></li>
-    <li class="list-group-item"><span class="title">테이스팅</span> <br /><span class="desc" v-html="taisting.replaceAll('\n','<br />')"></span></li>
-    <li class="list-group-item"><span class="title">설명</span> <br /><span class="desc" v-html="desc.replaceAll('\n','<br />')"></span></li>
-    <li class="list-group-item"><span class="title">기타지식</span><br /><span class="desc" v-html="etc.replaceAll('\n','<br />')"></span></li>
+      <span class="title">제품명</span><span class="desc">{{whiskey.제품명}}</span></li>
+    <li class="list-group-item"><span class="title">종류/도수</span> <span class="desc">{{whiskey.종류}} / {{whiskey.도수}}%</span></li>
+    <li class="list-group-item"><span class="title">테이스팅</span> <br /><span class="desc" v-html="whiskey.테이스팅.replaceAll('\n','<br />')"></span></li>
+    <li class="list-group-item"><span class="title">설명</span> <br /><span class="desc" v-html="whiskey.설명.replaceAll('\n','<br />')"></span></li>
+    <li class="list-group-item"><span class="title">기타지식</span><br /><span class="desc" v-html="whiskey.기타지식.replaceAll('\n','<br />')"></span></li>
   </ul>
   <form v-if="modistate == true">
     <ul class="list-group list-group-flush">
@@ -83,7 +82,7 @@ export default {
   name: 'WhiskeyInfo',
   data () {
     return {
-      whiskey: {},
+      // whiskey: {},
       modistate: false,
       imgfile: null,
       id: 0,
@@ -96,9 +95,9 @@ export default {
       etc: ''
     }
   },
-  // props: {
-  //   whiskey: Object
-  // },
+  props: {
+    whiskey: Object
+  },
   methods: {
     async btnModi () {
       await this.$nextTick()
@@ -122,24 +121,23 @@ export default {
     }
   },
   async created () {
-    const url = '/whiskey/' + this.$route.params.id
-    axios.get(url)
-      .then((res) => {
-        this.id = res.data.id
-        this.name = res.data.제품명
-        this.category = res.data.종류
-        this.degree = res.data.도수
-        this.price = res.data.가격대
-        this.taisting = res.data.테이스팅
-        this.desc = res.data.설명
-        this.etc = res.data.기타지식
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    await this.$nextTick()
+  //   const url = '/whiskey/' + this.$route.params.id
+  //   axios.get(url)
+  //     .then((res) => {
+  //       this.id = res.data.id
+  //       this.name = res.data.제품명
+  //       this.category = res.data.종류
+  //       this.degree = res.data.도수
+  //       this.price = res.data.가격대
+  //       this.taisting = res.data.테이스팅
+  //       this.desc = res.data.설명
+  //       this.etc = res.data.기타지식
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  //   await this.$nextTick()
   }
-
 }
 </script>
 

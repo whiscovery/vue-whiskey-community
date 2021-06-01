@@ -3,13 +3,14 @@
     <div id="header">
       <Header />
     </div>
-      <router-view :key="$route.fullPath" :whiskeys="whiskeys" />
+      <router-view :key="$route.fullPath" />
 
   </div>
 </template>
 
 <script>
 import Header from './components/Header'
+import { mapActions } from 'vuex'
 // import whiskeys from '@/assets/data.js'
 // import axios from 'axios'
 
@@ -20,21 +21,21 @@ export default {
   },
   data () {
     return {
-      whiskeys: []
+      // whiskeys: []
     }
   },
   computed: {
+    // ...mapState(['whiskeys'])
   },
   created () {
-    // axios.get('/whiskey')
-    //   .then((res) => {
-    //     this.whiskeys = res.data
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
-    this.$store.dispatch('fetchWhiskeys')
-    this.$store.dispatch('getProfile')
+    // this.$store.dispatch('fetchWhiskeys')
+    // this.$store.dispatch('getProfile')
+    // this.fetchWhiskeys()
+    this.getProfile()
+  },
+  methods: {
+    ...mapActions(['getProfile'])
+    // ...mapActions(['fetchWhiskeys', 'getProfile'])
   }
 }
 </script>

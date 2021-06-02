@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="button-write"><button @click="$emit('commentModalOpen')" class="btn btn-warning">음주 기록하기</button></div>
-            <div  v-if="myrecords">
+            <div v-if="myrecords">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -10,14 +10,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="comment, i in sortedByDate()" :key="i" >
+                        <tr v-for="comment, i in comments" :key="i" >
                         <td class="table-text"><span class="comment-date">{{comment.일시}}</span></td>
                         <td class="table-text t-left"><span class="comment-title">{{comment.위스키이름}}</span><span class="comment-location">(@ {{comment.장소}})</span>
                         <p class="comment-content">{{comment.내용}}</p></td>
                         </tr>
                     </tbody>
                 </table>
-            {{sortedByDate()}}
             </div>
             <div v-else>
                 데이터 불러오는 중
@@ -64,14 +63,13 @@ export default {
         //     })
         // }
     },
-  methods: {
-      sortedByDate () {
+    mounted () {
         this.comments = [...this.myrecords]
         this.comments.sort((a, b) => {
             return a.일시 > b.일시 ? -1 : a.일시 < b.일시 ? 1 : 0
         })
-        return this.comments
-      },
+    },
+    methods: {
     ...mapActions(['fetchMyRecords', 'getProfile'])
   }
 

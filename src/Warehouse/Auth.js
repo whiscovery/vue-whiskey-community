@@ -118,7 +118,6 @@ const actions = {
     }
 }
 
-
 export default {
     state,
     actions,

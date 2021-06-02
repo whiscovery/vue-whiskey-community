@@ -36,7 +36,6 @@ export default {
         }
     },
     props: {
-        email: String
     },
     // async mounted () {
     //   const url = '/comment/search/' + this.email
@@ -49,8 +48,8 @@ export default {
     //       })
     // },
     created () {
-        this.fetchMyRecords(this.user.email)
         this.getProfile()
+        this.fetchMyRecords(this.user.email)
     },
     computed: {
         ...mapGetters(['user']),

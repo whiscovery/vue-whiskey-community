@@ -3,7 +3,7 @@
     <transition name="myModal">
     <div v-if="commentwriteModal" class="black-bg">
         <div class="white-bg">
-        <WriteMyRecord :email="user.email" :nick="user.nick" @closeModal="commentwriteModal=false" @getDataAgain="getData;commentwriteModal=false" />
+        <WriteMyRecord :email="user.email" :nick="user.nick" @submit="onCommentSubmit" @closeModal="commentwriteModal=false" />
         </div>
     </div>
     </transition>
@@ -18,7 +18,7 @@
                 </ul>
             </div> -->
             <div class="col-sm-12">
-              <MyRecord :email="user.email" :myrecords="myrecords" @commentModalOpen="commentwriteModal = true;" />
+              <MyRecord @commentModalOpen="commentwriteModal = true;" />
             </div>
         </div>
         </div>
@@ -29,7 +29,7 @@
 // import axios from 'axios'
 import WriteMyRecord from '@/components/WriteMyRecord'
 import MyRecord from '@/components/MyRecord'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'MyWorld',
@@ -52,6 +52,19 @@ export default {
     this.$store.dispatch('getProfile')
   },
   methods: {
+    onCommentSubmit (inputComment) {
+      if (confirm('댓글 작성하시겠습니까')) {
+        this.writeComment(inputComment)
+        .then(() => {
+          alert('댓글이 작성되었습니다')
+          this.commentwriteModal = false
+        })
+        .catch(err => {
+          alert(err.response.data.msg)
+        })
+      }
+    },
+    ...mapActions(['writeComment'])
     // ...mapActions(['fetchMyRecords'])
   }
 }

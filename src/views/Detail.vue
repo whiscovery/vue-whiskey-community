@@ -64,8 +64,8 @@ import WhiskeyComment from '@/components/WhiskeyComment'
 import WriteComment from '@/components/WriteComment'
 import WriteTaisting from '@/components/WriteTaisting'
 import TaistDetail from '@/components/TaistDetail'
-import axios from 'axios'
-import { baseurl } from '@/config/index'
+// import axios from 'axios'
+// import { baseurl } from '@/config/index'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -89,7 +89,7 @@ export default {
   },
   props: {
     postId: {
-      type: Number,
+      type: String,
       required: true
     }
   },
@@ -114,30 +114,25 @@ export default {
   },
   methods: {
     onCommentSubmit (inputComment) {
-      console.log(inputComment)
-      this.writeComment(inputComment)
-      .then(() => {
-        alert('댓글이 작성되었습니다')
-      })
-      .catch(err => {
-        alert(err.response.data.msg)
-      })
+      if (confirm('댓글 작성하시겠습니까')) {
+        this.writeComment(inputComment)
+        .then(() => {
+          alert('댓글이 작성되었습니다')
+          this.commentwriteModal = false
+        })
+        .catch(err => {
+          alert(err.response.data.msg)
+        })
+        }
     },
     deleteComment (value) {
-      if (confirm('코멘트를 삭제하시겠습니까?')) {
-        axios.delete(baseurl + `/comment/delete/${value}`)
-        .then((res) => {
-          console.log(res)
-          // alert("코멘트가 삭제되었습니다.")
-          // this.$router.push({
-          //   name: 'Detail',
-          //   params: { id: res.data }
-          // })
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      }
+      this.deleteComment(value)
+      .then(res => {
+        alert('댓글이 삭제되었습니다.')
+      })
+      .catch(err => {
+        console.log(err)
+      })
     },
     calData () {
       var tempdata = this.whiskey.테이스팅점수
@@ -158,7 +153,7 @@ export default {
 
       return mapdata
     },
-    ...mapActions(['fetchWhiskey', 'fetchComment', 'writeComment'])
+    ...mapActions(['fetchWhiskey', 'fetchComment', 'writeComment', 'deleteComment'])
   }
 
 }

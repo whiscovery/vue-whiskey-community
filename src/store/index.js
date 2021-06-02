@@ -33,6 +33,10 @@ export default new Vuex.Store({
     },
     WRITE_COMMENT (state, payload) {
       state.comments.push(payload)
+    },
+    DELETE_COMMENT (state, commentID) {
+      const targetIndex = state.comments.findIndex(comment => comment.id === commentID)
+      state.comments.splice(targetIndex, 1)
     }
   },
   actions: {
@@ -64,6 +68,12 @@ export default new Vuex.Store({
       axios.post(baseurl + '/writecomment', payload)
       .then(res => {
         commit('WRITE_COMMENT', res.data)
+      })
+    },
+    deleteComment ({ commit }, payload) {
+      axios.delete(baseurl + `/comment/delete/${payload}`)
+      .then(res => {
+        commit('DELETE_COMMENT', payload)
       })
     }
   }

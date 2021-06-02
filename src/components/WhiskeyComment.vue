@@ -55,7 +55,11 @@ export default {
       this.$store.commit('COMMENTMODALOPEN')
     },
     delComment (value) {
-      this.$emit('delete', value)
+      if (confirm('삭제하겠습니까?')) {
+        this.$emit('delete', value)
+      } else {
+        alert('취소하셨습니다')
+      }
     }
   }
 }

@@ -12,13 +12,13 @@
         </svg>
       </div>
       <div v-if="whiskeyslist">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" v-if="shortlist == true">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" v-if="shortlist == false">
           <input class="form-control" v-model="whiskeysearch" placeholder="위스키 이름 검색">
             <div class="col" v-for="whiskey in filteredWhiskey" :key="whiskey.id">
               <Listitem :whiskey="whiskey" />
             </div>
         </div>
-        <div class="row" v-if="shortlist == false">
+        <div class="row" v-if="shortlist == true">
           <input class="form-control mb-3" v-model="whiskeysearch" placeholder="위스키 이름 검색">
             <div class="row mb-3" v-for="whiskey in filteredWhiskey" :key="whiskey.id">
               <FullListitem :whiskey="whiskey" />

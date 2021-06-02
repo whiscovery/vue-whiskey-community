@@ -2,11 +2,11 @@
 <div class="container mt-5">
   <h3> 위스키 입력 </h3>
   <form class="row g-3 mt-3">
-    <div class="col-md-5 form-floating mb-3">
+    <div class="form-floating mb-3">
       <input type="text" v-model="name" class="form-control" id="name" placeholder="위스키 제품명">
       <label for="name">제품명(영문)</label>
     </div>
-    <div class="col-md-3 form-floating mb-3">
+    <div class="col-md-4 form-floating mb-3">
       <select v-model="category" id="category" class="form-select">
         <option>스카치 위스키</option>
         <option>버번 위스키</option>
@@ -22,6 +22,10 @@
     <div class="col-md-2 form-floating mb-3">
       <input type="text" v-model="price" class="form-control" id="price" placeholder="name@example.com">
       <label for="price">가격대</label>
+    </div>
+    <div class="col-md-4 form-floating mb-3">
+      <input type="text" v-model="특이사항" class="form-control" id="특이사항" placeholder="특이사항">
+      <label for="특이사항">특이사항</label>
     </div>
       <div class="col-md-5">
         <UploadPhoto @getImageURL="getImageURL" />
@@ -70,7 +74,8 @@ export default {
       price: '',
       tasting: '',
       desc: '',
-      etc: ''
+      etc: '',
+      특이사항: '없음'
     }
   },
   components: {
@@ -86,7 +91,8 @@ export default {
         가격대: this.price,
         테이스팅: this.tasting,
         설명: this.desc,
-        기타지식: this.etc
+        기타지식: this.etc,
+        특이사항: this.특이사항
       })
         .then((res) => {
           console.log(res)

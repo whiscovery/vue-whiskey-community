@@ -4,6 +4,8 @@
     <li class="list-group-item">
       <span class="title">제품명</span><span class="desc">{{whiskey.제품명}}</span></li>
     <li class="list-group-item"><span class="title">종류/도수</span> <span class="desc">{{whiskey.종류}} / {{whiskey.도수}}%</span></li>
+    <li class="list-group-item">
+      <span class="title">특이사항</span><span class="desc">{{whiskey.특이사항}}</span></li>
     <li class="list-group-item"><span class="title">테이스팅</span> <br /><span class="desc" v-html="whiskey.테이스팅.replaceAll('\n','<br />')"></span></li>
     <li class="list-group-item"><span class="title">설명</span> <br /><span class="desc" v-html="whiskey.설명.replaceAll('\n','<br />')"></span></li>
     <li class="list-group-item"><span class="title">기타지식</span><br /><span class="desc" v-html="whiskey.기타지식.replaceAll('\n','<br />')"></span></li>
@@ -32,6 +34,14 @@
         <label for="도수" class="col-sm-2 col-form-label col-form-label-sm"><span class="title">도수</span></label>
         <div class="col-sm-10">
           <input type="text" class="form-control form-control-sm" id="도수" v-model="도수">
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <label for="특이사항" class="col-sm-2 col-form-label col-form-label-sm"><span class="title">특이사항</span></label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control form-control-sm" id="특이사항" v-model="특이사항">
         </div>
       </div>
     </li>
@@ -93,7 +103,8 @@ export default {
       가격대: this.whiskey.가격대,
       테이스팅: this.whiskey.테이스팅,
       설명: this.whiskey.설명,
-      기타지식: this.whiskey.기타지식
+      기타지식: this.whiskey.기타지식,
+      특이사항: this.whiskey.특이사항
     }
   },
   props: {
@@ -112,7 +123,8 @@ export default {
         가격대: this.가격대,
         테이스팅: this.테이스팅,
         설명: this.설명,
-        기타지식: this.기타지식
+        기타지식: this.기타지식,
+        특이사항: this.특이사항
       })
         .then((res) => {
           alert('수정되었습니다')

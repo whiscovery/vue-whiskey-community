@@ -48,7 +48,7 @@ export default new Vuex.Store({
         commit('FETCH_WHISKEY', res.data)
       })
     },
-    fetchMyrecords ({ commit }, payload) {
+    fetchMyRecords ({ commit }, payload) {
       axios.get(baseurl + '/comment/search/' + payload)
       .then((res) => {
         commit('FETCH_MYRECORDS', res.data)

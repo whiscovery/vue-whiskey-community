@@ -24,15 +24,7 @@
       <label for="price">가격대</label>
     </div>
       <div class="col-md-5">
-        <div class="text-center">
-          <img v-if="imgfile" :src="imgfile" class="no-img">
-          <img v-else src="http://dy.gnch.or.kr/img/no-image.jpg" class="no-img">
-        </div>
-        <div class="col-md-12 form-floating mb-3">
-          <input @change="handleImageUpload" type="file">
-          <!-- <input type="text" v-model="image" class="form-control" id="image" placeholder="name@example.com">
-          <label for="image">이미지 URL</label> -->
-        </div>
+        <UploadPhoto @getImageURL="getImageURL" />
       </div>
       <div class="col-md-7">
       <div class="form-floating">
@@ -62,12 +54,14 @@
 </template>
 
 <script>
+import UploadPhoto from '@/components/UploadPhoto'
 import axios from 'axios'
+import { baseurl } from '@/config/index'
 export default {
   name: 'Input',
   data () {
     return {
-      imgfile: null,
+      imgfile: '',
       whiskey: {},
       name: '',
       category: '',
@@ -79,9 +73,12 @@ export default {
       etc: ''
     }
   },
+  components: {
+    UploadPhoto: UploadPhoto
+  },
   methods: {
     btnOK () {
-      axios.post('/writepost', {
+      axios.post(baseurl + '/writepost', {
         제품명: this.name,
         종류: this.category,
         도수: this.degree,
@@ -102,23 +99,8 @@ export default {
           console.log(err)
         })
     },
-    handleImageUpload (e) {
-      // const data = new FormData()
-      // data.append('image', e.target.files[0])
-      // console.log(data)
-      const data = e.target.files[0]
-      axios({
-        method: 'post',
-        url: 'https://api.imgur.com/3/image/',
-        data: data,
-        headers: { Authorization: 'Client-ID 2b9222138a7cc78' }
-      })
-        .then((res) => {
-          this.imgfile = res.data.data.link
-        })
-        .then((err) => {
-          console.log(err)
-        })
+    getImageURL (url) {
+      this.imgfile = url
     }
   }
 }

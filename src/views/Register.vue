@@ -64,12 +64,16 @@ export default {
               checknick: this.checknick,
               checkemail: this.checkemail
           }
-          this.register(user).then(res => {
-              if (res.data.success) {
-                  alert('가입되셨습니다. 로그인해주세요.')
-                  this.$router.push('login')
-              }
-          })
+          if (!this.nick || !this.password || !this.confirm_password || !this.email || !this.checknick || !this.checkemail) {
+              alert('모든 항목을 기입해주세요.')
+          } else {
+            this.register(user).then(res => {
+                if (res.data.success) {
+                    alert('가입되셨습니다. 로그인해주세요.')
+                    this.$router.push('login')
+                }
+            })
+          }
       }
   }
 }

@@ -60,6 +60,7 @@
 
 <script>
 import axios from 'axios'
+import { baseurl } from '@/config/index'
 
 export default {
   name: 'WriteTaisting',
@@ -85,7 +86,7 @@ export default {
         whiskeyid: this.id,
         테이스팅점수: [taistingbody, taisting달콤, taisting피트, taisting스파이스, taisting과일, taisting견과, taisting몰트]
       }
-      axios.post('/writepost/taisting', data)
+      axios.post(baseurl + '/writepost/taisting', data)
         .then((res) => {
           alert('테이스팅 점수가 저장되었습니다')
           console.log(res)

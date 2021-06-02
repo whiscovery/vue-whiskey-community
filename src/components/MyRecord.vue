@@ -1,6 +1,7 @@
 <template>
 <div>
     <div class="button-write"><button @click="$emit('commentModalOpen')" class="btn btn-warning">음주 기록하기</button></div>
+            <div  v-if="myrecords">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -9,49 +10,62 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="comment, i in sortedComments" :key="i" >
-                        <td class="table-text"><span class="comment-date">{{comments[i].일시}}</span></td>
-                        <td class="table-text t-left"><span class="comment-title">{{comments[i].위스키이름}}</span><span class="comment-location">(@ {{comments[i].장소}})</span>
-                        <p class="comment-content">{{comments[i].내용}}</p></td>
+                        <tr v-for="comment, i in myrecords" :key="i" >
+                        <td class="table-text"><span class="comment-date">{{comment.일시}}</span></td>
+                        <td class="table-text t-left"><span class="comment-title">{{comment.위스키이름}}</span><span class="comment-location">(@ {{comment.장소}})</span>
+                        <p class="comment-content">{{comment.내용}}</p></td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div v-else>
+                데이터 불러오는 중
+            </div>
 </div>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import { mapGetters, mapState, mapActions } from 'vuex'
+
 export default {
     name: 'MyRecord',
     data () {
         return {
-            comments: [],
-            temps: []
+            comments: [...this.myrecords]
         }
     },
     props: {
         email: String
     },
-    async mounted () {
-      const url = '/comment/search/' + this.email
-      await axios.get(url)
-          .then((res) => {
-            this.comments = res.data
-          })
-          .catch((err) => {
-            console.log(err)
-          })
+    // async mounted () {
+    //   const url = '/comment/search/' + this.email
+    //   await axios.get(url)
+    //       .then((res) => {
+    //         this.comments = res.data
+    //       })
+    //       .catch((err) => {
+    //         console.log(err)
+    //       })
+    // },
+    created () {
+        this.fetchMyRecords(this.user.email)
+        this.getProfile()
     },
     computed: {
+        ...mapGetters(['user']),
+        ...mapState(['myrecords'])
         // 위스키 정보 데이터 중 '제품명' 필드에 검색어가 포함되어 있는지 확인 후 참이면 반환
-        sortedComments () {
-            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-            this.comments.sort((a, b) => {
-                return a.일시 > b.일시 ? -1 : a.일시 < b.일시 ? 1 : 0
-            })
-            return this.comments
-        }
-    }
+        // sortedComments () {
+        //     // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        //     return this.comments.sort((a, b) => {
+        //         return a.일시 > b.일시 ? -1 : a.일시 < b.일시 ? 1 : 0
+        //     })
+        // }
+    },
+  methods: {
+    ...mapActions(['fetchMyRecords', 'getProfile'])
+  }
 
 }
 </script>

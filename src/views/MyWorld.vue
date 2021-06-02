@@ -18,7 +18,7 @@
                 </ul>
             </div> -->
             <div class="col-sm-12">
-              <MyRecord :email="user.email" @commentModalOpen="commentwriteModal = true;" />
+              <MyRecord :email="user.email" :myrecords="myrecords" @commentModalOpen="commentwriteModal = true;" />
             </div>
         </div>
         </div>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import WriteMyRecord from '@/components/WriteMyRecord'
 import MyRecord from '@/components/MyRecord'
 import { mapGetters } from 'vuex'
@@ -43,25 +43,16 @@ export default {
       commentwriteModal: false
     }
   },
-  computed: mapGetters(['user']),
+  computed: {
+    ...mapGetters(['user'])
+    // ...mapState(['myrecords'])
+  },
   created () {
+    // this.fetchMyRecords(this.user.email)
     this.$store.dispatch('getProfile')
   },
   methods: {
-    async getData () {
-      await this.$nextTick()
-      const url = '/comment/search/' + this.user.email
-      await axios.get(url)
-          .then((res) => {
-            this.comments = res.data
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-    }
-  },
-  mounted () {
-    this.getData()
+    // ...mapActions(['fetchMyRecords'])
   }
 }
 </script>

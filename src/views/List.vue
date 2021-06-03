@@ -25,7 +25,11 @@
             </div>
         </div>
       </div>
-      <div v-else> 위스키 리스트 불러오는 중 </div>
+      <div v-else>
+        <div class="loading">
+          <img :src="loading">
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -34,7 +38,7 @@
 import Listitem from '@/components/Listitem'
 import FullListitem from '@/components/FullListitem'
 import { mapState, mapActions } from 'vuex'
-// import axios from 'axios'
+import loading from '@/assets/loading.gif'
 
 export default {
   name: 'List',
@@ -42,7 +46,8 @@ export default {
     return {
       whiskeysearch: '',
       // whiskeys: [],
-      shortlist: false
+      shortlist: false,
+      loading: loading
     }
   },
   components: {
@@ -91,5 +96,16 @@ export default {
 }
 .right-menu {
   text-align: right;
+}
+.loading {
+  width: 100%;
+  height: 400px;
+  line-height: 400px;
+  text-align: center;
+}
+.loading > img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
 }
 </style>

@@ -21,12 +21,18 @@ export default new Vuex.Store({
   mutations: {
     FETCH_WHISKEYS_LIST (state, payload) {
       state.whiskeyslist = payload
+      state.whiskeyslist.sort((a, b) => {
+        return a.제품명 > b.제품명 ? 1 : a.제품명 < b.제품명 ? -1 : 0
+      })
     },
     FETCH_WHISKEY (state, payload) {
       state.whiskey = payload
     },
     FETCH_MYRECORDS (state, payload) {
       state.myrecords = payload
+      state.myrecords.sort((a, b) => {
+        return a.일시 > b.일시 ? -1 : a.일시 < b.일시 ? 1 : 0
+      })
     },
     FETCH_COMMENT (state, payload) {
       state.comments = payload

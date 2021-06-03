@@ -50,7 +50,11 @@
             </div>
         </div>
       </div>
-      <div v-else>게시물 불러오는 중</div>
+      <div v-else>
+          <div class="loading">
+            <img :src="loading">
+          </div>
+      </div>
   </div>
 </div>
 </template>
@@ -67,6 +71,7 @@ import TaistDetail from '@/components/TaistDetail'
 // import axios from 'axios'
 // import { baseurl } from '@/config/index'
 import { mapState, mapActions } from 'vuex'
+import loading from '@/assets/loading.gif'
 
 export default {
   name: 'List',
@@ -75,7 +80,8 @@ export default {
       commentwhiskeyname: null,
       commentwriteModal: false,
       taistwriteModal: false,
-      taistdetailModal: false
+      taistdetailModal: false,
+      loading: loading
     }
   },
   components: {
@@ -103,14 +109,6 @@ export default {
       this.$router.back()
     })
     this.fetchComment(this.postId)
-    // const url = baseurl + '/whiskey/' + this.$route.params.id
-    // axios.get(url)
-    //   .then((res) => {
-    //     this.whiskey = res.data
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
   },
   methods: {
     onCommentSubmit (inputComment) {
@@ -266,5 +264,16 @@ export default {
   /* background: linear-gradient(135deg, #fffcdc, #d9a7c7); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.301);
   border-radius: 5px; /* 5px rounded corners */
+}
+.loading {
+  width: 100%;
+  height: 400px;
+  line-height: 400px;
+  text-align: center;
+}
+.loading > img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
 }
 </style>

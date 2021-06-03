@@ -3,7 +3,8 @@
   <div class="box">
     <router-link class="text-link" :to="{ name: 'Detail', params: { postId: whiskey.id }}">
       <!-- <img :src="특이사항이미지" class="badge-img"> -->
-      <div v-if="whiskey.특이사항 == '위스커버리 1기 스터디'" class="badge-div"><span class="badge rounded-pill bg-warning">1기 스터디</span></div>
+      <div class="badge-div-1"><span class="badge rounded-pill bg-warning mt-1" v-if="whiskey.특이사항 ? whiskey.특이사항.includes('위스커버리 1기 스터디') : false">1기 스터디</span><span class="badge rounded-pill bg-info mt-1" v-if="whiskey.특이사항 ? whiskey.특이사항.includes('22종 버번 테이스팅') : false">22종 버번 테이스팅</span></div>
+
       <img :src="whiskey.이미지" class="thumbnail-whiskey"></router-link>
   </div>
   <div class="card-body">
@@ -49,10 +50,17 @@ export default {
   left: 3px;
   opacity: 0.5; filter: alpha(opacity=50);
 }
-.badge-div {
+.badge-div-1 {
   width: 40px;
   position: absolute;
   top: 3px;
+  left: 3px;
+  opacity: 0.7; filter: alpha(opacity=50);
+}
+.badge-div-2 {
+  width: 40px;
+  position: absolute;
+  top: 28px;
   left: 3px;
   opacity: 0.7; filter: alpha(opacity=50);
 }

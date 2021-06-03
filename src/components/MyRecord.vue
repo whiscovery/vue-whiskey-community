@@ -6,8 +6,8 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                        <th class="col-sm-2 table-text">마신날</th>
-                        <th class="col-sm-8 table-text">내용</th>
+                        <th class="col-sm-3 table-text">#</th>
+                        <th class="col-sm-9 table-text">내용</th>
                         </tr>
                     </thead>
                     <tbody>

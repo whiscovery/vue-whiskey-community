@@ -11,6 +11,7 @@
         <option>스카치 위스키</option>
         <option>버번 위스키</option>
         <option>레이 위스키</option>
+        <option>아일리쉬 위스키</option>
         <option>기타</option>
       </select>
       <label for="category">종류</label>

@@ -47,7 +47,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchWhiskeysList ({ commit }) {
-      axios.get(baseurl + '/whiskey')
+      axios.get(baseurl + '/whiskeylist')
       .then((res) => {
         commit('FETCH_WHISKEYS_LIST', res.data)
       })

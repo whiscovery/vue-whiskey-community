@@ -25,10 +25,8 @@ export default {
   },
   mounted () {
     if (this.whiskey.특이사항 || this.whiskey.특이사항 !== '없음') {
-      console.log('1')
       if (this.whiskey.특이사항 === '위스커버리 1기 스터디') {
         this.특이사항이미지 = study1
-        console.log('2')
       }
     }
   },

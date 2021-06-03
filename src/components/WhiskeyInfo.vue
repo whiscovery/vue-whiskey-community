@@ -1,5 +1,5 @@
 <template>
-<div class="info" @dblclick="modistate = true">
+<div class="info" @dblclick="btnModiInit">
   <ul class="list-group list-group-flush" v-if="modistate == false">
     <li class="list-group-item">
       <span class="title">제품명</span><span class="desc">{{whiskey.제품명}}</span></li>
@@ -96,36 +96,54 @@ export default {
       // whiskey: {},
       modistate: false,
       imgfile: null,
-      id: this.whiskey.id,
-      제품명: this.whiskey.제품명,
-      종류: this.whiskey.종류,
-      도수: this.whiskey.도수,
-      가격대: this.whiskey.가격대,
-      테이스팅: this.whiskey.테이스팅,
-      설명: this.whiskey.설명,
-      기타지식: this.whiskey.기타지식,
-      특이사항: this.whiskey.특이사항
+      id: 0,
+      제품명: '',
+      종류: '',
+      도수: '',
+      가격대: '',
+      테이스팅: '',
+      설명: '',
+      기타지식: '',
+      특이사항: ''
+      // id: this.whiskey.id,
+      // 제품명: this.whiskey.제품명,
+      // 종류: this.whiskey.종류,
+      // 도수: this.whiskey.도수,
+      // 가격대: this.whiskey.가격대,
+      // 테이스팅: this.whiskey.테이스팅,
+      // 설명: this.whiskey.설명,
+      // 기타지식: this.whiskey.기타지식,
+      // 특이사항: this.whiskey.특이사항
     }
   },
   props: {
     whiskey: Object
   },
   methods: {
-    async btnModi () {
+    btnModiInit () {
+      this.id = this.whiskey.id
       this.제품명 = this.whiskey.제품명
-
-      await this.$nextTick()
+      this.종류 = this.whiskey.종류
+      this.도수 = this.whiskey.도수
+      this.가격대 = this.whiskey.가격대
+      this.테이스팅 = this.whiskey.테이스팅
+      this.설명 = this.whiskey.설명
+      this.기타지식 = this.whiskey.기타지식
+      this.특이사항 = this.whiskey.특이사항
+      this.modistate = true
+    },
+    btnModi () {
       axios.post(baseurl + '/editpost', {
-        id: this.id,
-        제품명: this.제품명,
-        종류: this.종류,
-        도수: this.도수,
-        가격대: this.가격대,
-        테이스팅: this.테이스팅,
-        설명: this.설명,
-        기타지식: this.기타지식,
-        특이사항: this.특이사항
-      })
+          id: this.id,
+          제품명: this.제품명,
+          종류: this.종류,
+          도수: this.도수,
+          가격대: this.가격대,
+          테이스팅: this.테이스팅,
+          설명: this.설명,
+          기타지식: this.기타지식,
+          특이사항: this.특이사항
+        })
         .then((res) => {
           alert('수정되었습니다')
           this.modistate = false
@@ -139,22 +157,6 @@ export default {
     }
   },
   async created () {
-  //   const url = '/whiskey/' + this.$route.params.id
-  //   axios.get(url)
-  //     .then((res) => {
-  //       this.id = res.data.id
-  //       this.name = res.data.제품명
-  //       this.category = res.data.종류
-  //       this.degree = res.data.도수
-  //       this.price = res.data.가격대
-  //       this.taisting = res.data.테이스팅
-  //       this.desc = res.data.설명
-  //       this.etc = res.data.기타지식
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  //   await this.$nextTick()
   }
 }
 </script>

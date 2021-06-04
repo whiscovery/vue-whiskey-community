@@ -105,7 +105,7 @@ export default {
     font-size: 30px;
 }
 .name{
-    font-size: 18px;
+    font-size: 14px;
 }
 .speech-bubble {
     position:relative;

@@ -1,5 +1,29 @@
 <template>
 <div>
+<!-- <transition name="contactModal">
+  <div v-if="deleteModal" class="black-bg">
+    <div class="white-bg">
+        <form class="row row-cols-lg-auto g-3 align-items-center">
+          <div class="col-12">
+            <div class="input-group">
+              <input type="password" v-model="패스워드" class="form-control" id="패스워드" placeholder="패스워드">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group">{{$event}}
+              <button @click="delComment(comment.id)" type="submit" class="btn btn-warning">삭제</button>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group">
+              <button @click="deleteOpen=false" type="submit" class="btn btn-success">취소</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</transition> -->
+
 <transition name="contactModal">
   <div v-if="commentwriteModal" class="black-bg">
     <div class="white-bg">
@@ -124,11 +148,13 @@ export default {
         }
     },
     deleteComment (value) {
+      console.log(value)
       this.deleteComment(value)
       .then(res => {
         alert('댓글이 삭제되었습니다.')
       })
       .catch(err => {
+        alert('패스워드가 다릅니다.')
         console.log(err)
       })
     },

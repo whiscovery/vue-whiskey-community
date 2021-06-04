@@ -77,8 +77,16 @@
         </div>
       </div>
     </li>
+    <li class="list-group-item">
+      <div class="row">
+        <label for="패스워드" class="col-sm-2 col-form-label col-form-label-sm"><span class="title">패스워드</span></label>
+        <div class="col-sm-10">
+          <textarea type="text" class="form-control form-control-sm" id="패스워드" v-model="패스워드" style="width: 100%; height: 180px"></textarea>
+        </div>
+      </div>
+    </li>
   <div class="btnmodi">
-    <button @click="btnModi" type="submit" class="btn btn-warning mt-3">수 정</button>
+    <button @click.prevent="btnModi" type="submit" class="btn btn-warning mt-3">수 정</button>
     <button @click="btnModiCancel" type="submit" class="btn btn-danger mt-3 ms-1">취 소</button>
   </div>
   </ul>
@@ -89,6 +97,8 @@
 <script>
 import axios from 'axios'
 import { baseurl } from '@/config/index'
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'WhiskeyInfo',
   data () {
@@ -104,7 +114,8 @@ export default {
       테이스팅: '',
       설명: '',
       기타지식: '',
-      특이사항: ''
+      특이사항: '',
+      패스워드: ''
       // id: this.whiskey.id,
       // 제품명: this.whiskey.제품명,
       // 종류: this.whiskey.종류,
@@ -116,8 +127,11 @@ export default {
       // 특이사항: this.whiskey.특이사항
     }
   },
-  props: {
-    whiskey: Object
+  // props: {
+  //   whiskey: Object
+  // },
+  computed: {
+    ...mapState(['whiskey'])
   },
   methods: {
     btnModiInit () {
@@ -142,21 +156,27 @@ export default {
           테이스팅: this.테이스팅,
           설명: this.설명,
           기타지식: this.기타지식,
-          특이사항: this.특이사항
+          특이사항: this.특이사항,
+          패스워드: this.패스워드
         })
         .then((res) => {
           alert('수정되었습니다')
+          this.fetchWhiskey(this.id)
           this.modistate = false
+          this.$router.push({
+            name: 'Detail',
+            params: { postId: parseInt(this.id) }
+          }).catch(() => {})
         })
         .catch((err) => {
+          alert('패스워드가 맞지 않습니다')
           console.log(err)
         })
     },
     btnModiCancel () {
       this.modistate = false
-    }
-  },
-  async created () {
+    },
+    ...mapActions(['fetchWhiskey'])
   }
 }
 </script>

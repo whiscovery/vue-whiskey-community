@@ -77,9 +77,10 @@ export default new Vuex.Store({
       })
     },
     deleteComment ({ commit }, payload) {
-      axios.delete(baseurl + `/comment/delete/${payload}`)
+      console.log(payload.id)
+      axios.delete(baseurl + `/comment/delete/${payload.id}`, { data: { 패스워드: `${payload.패스워드}` } })
       .then(res => {
-        commit('DELETE_COMMENT', payload)
+        commit('DELETE_COMMENT', payload.id)
       })
     }
   }

@@ -6,10 +6,8 @@
             <p class="title">Recent Whiskeys</p>
             <div class="wrapper m-1 p-1" v-for="whiskey, j in getWhiskeysList()" :key="j">
                 <div class="row mb-1">
-                    <div class="col-md-1"><img :src="barrel" width="100%" class="over-img">
-                    </div>
-                        <div class="col-md-11 md-3 mt-2">
-                             <button type="button" class="btn btn-outline-warning"><router-link class="text-link" :to="{ name: 'Detail', params: { postId: whiskey.id }}"><span class="whiskey">{{whiskey.제품명}}</span></router-link> </button>
+                        <div class="col-md-12 col-sm-12 md-3 mt-2"><img :src="barrel" width="100%" class="over-img m-1 me-1">
+                             <button type="button" class="btn btn-outline-warning mt-2 ms-3"><router-link class="text-link" :to="{ name: 'Detail', params: { postId: whiskey.id }}"><span class="whiskey">{{whiskey.제품명}}</span></router-link> </button>
                             <!-- <span class="comment-content"> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}}에서)</small> </span> -->
                         </div>
                 </div>

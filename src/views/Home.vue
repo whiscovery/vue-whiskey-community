@@ -1,25 +1,30 @@
 <template>
-<div class="div2">
+<div class="container">
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2 mt-3 m-2">
+
     <div class="col">
-        <div class="card shadow-sm">
-        <div class="card-body">
-                등록 위스키(총 {{whiskeyslist.length}}개)
-                <ul v-for="whiskey, i in getWhiskeysList()" :key="i">
-                    <li>{{whiskey.제품명}}</li>
-                </ul>
-        </div>
-        </div>
+            <p class="title">Recent Whiskeys</p>
+            <div class="wrapper m-1 p-1" v-for="whiskey, j in getWhiskeysList()" :key="j">
+                <div class="row">
+                    <div class="col-md-1"><img :src="barrel" width="100%" class="over-img">
+                    </div>
+                        <div class="col-md-11 md-3 mt-2">
+                             <button type="button" class="btn btn-outline-warning"><router-link class="text-link" :to="{ name: 'Detail', params: { postId: whiskey.id }}"><span class="whiskey">{{whiskey.제품명}}</span></router-link> </button>
+                            <!-- <span class="comment-content"> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}}에서)</small> </span> -->
+                        </div>
+                </div>
+            </div>
     </div>
     <div class="col">
-            <div class="wrapper" v-for="comment, i in getCommentsList()" :key="i">
+            <p class="title">Recent Comments</p>
+            <div class="wrapper m-1 p-1" v-for="comment, i in getCommentsList()" :key="i">
                 <div class="row">
                     <div class="col-md-2"><img :src="man1" width="100%" class="over-img">
-                        <span class="badge bg-dark over-letter">{{comment.이름}}</span>
+                        <span class="badge bg-dark over-letter m-1">{{comment.이름}}</span>
                     </div>
                         <div class="col-md-10 speech-bubble md-3 mt-3">
-                            <span class="badge bg-primary name">{{comment.위스키이름}} </span>
-                            <span class="comment-content"> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}}에서)</small> </span>
+                            <router-link class="text-link" :to="{ name: 'Detail', params: { postId: comment.위스키번호 }}"><span class="badge bg-warning name">{{comment.위스키이름}} </span></router-link><span class="comment-content"><small> ({{comment.일시}} @ {{comment.장소}}에서)</small></span><br />
+                            <span class="comment-content"> "{{comment.내용}}"  </span>
                         </div>
                 </div>
             </div>
@@ -31,12 +36,14 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import man1 from '@/assets/people/man1.png'
+import barrel from '@/assets/barrel.png'
 
 export default {
   name: 'Home',
   data () {
       return {
-          man1: man1
+          man1: man1,
+          barrel: barrel
       }
   },
   created () {
@@ -54,7 +61,7 @@ export default {
          filtered.sort((a, b) => {
              return a._id > b._id ? 1 : a._id < b._id ? -1 : 0
          })
-         for (var i = 0; i < 10; i++) {
+         for (var i = 0; i < 5; i++) {
             temp.push(filtered[i])
          }
          return temp
@@ -92,7 +99,11 @@ export default {
 .comment{
     margin: 0px auto;
 }
-
+.title {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+}
 .name{
     font-size: 18px;
 }
@@ -115,19 +126,25 @@ export default {
 }
 .comment-content{
   font-size: 13px;
+    font-family: 'Exo 2', sans-serif;
 }
 .over-img{
     width: 40px;
-  position: absolute;
+  position: relative;
   top: 3px;
   left: 3px;
-  opacity: 0.5; filter: alpha(opacity=50);
+  opacity: 0.0.8; filter: alpha(opacity=50);
 }
 .over-letter{
     width: 40px;
-  position: absolute;
+  position: relative;
   top: 3px;
   left: 3px;
   opacity: 0.7; filter: alpha(opacity=50);
+    font-family: 'Exo 2', sans-serif;
+}
+.whiskey{
+    color: rgb(49, 37, 37);
+    font-family: 'Exo 2', sans-serif;
 }
 </style>

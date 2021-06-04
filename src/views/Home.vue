@@ -5,7 +5,7 @@
     <div class="col">
             <p class="title">Recent Whiskeys</p>
             <div class="wrapper m-1 p-1" v-for="whiskey, j in getWhiskeysList()" :key="j">
-                <div class="row">
+                <div class="row mb-1">
                     <div class="col-md-1"><img :src="barrel" width="100%" class="over-img">
                     </div>
                         <div class="col-md-11 md-3 mt-2">
@@ -105,7 +105,7 @@ export default {
     font-size: 30px;
 }
 .name{
-    font-size: 14px;
+    font-size: 13px;
 }
 .speech-bubble {
     position:relative;

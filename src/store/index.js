@@ -14,7 +14,8 @@ export default new Vuex.Store({
     whiskeyslist: [],
     whiskey: null,
     myrecords: [],
-    comments: []
+    comments: [],
+    commentslist: []
   },
   getters: {
   },
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     },
     FETCH_COMMENT (state, payload) {
       state.comments = payload
+    },
+    FETCH_COMMENT_LIST (state, payload) {
+      state.commentslist = payload
     },
     WRITE_COMMENT (state, payload) {
       state.comments.push(payload)
@@ -62,6 +66,12 @@ export default new Vuex.Store({
       axios.get(baseurl + '/comment/search/' + payload)
       .then((res) => {
         commit('FETCH_MYRECORDS', res.data)
+      })
+    },
+    fetchCommentList ({ commit }) {
+      axios.get(baseurl + '/comment')
+      .then((res) => {
+        commit('FETCH_COMMENT_LIST', res.data)
       })
     },
     fetchComment ({ commit }, payload) {

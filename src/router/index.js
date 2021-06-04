@@ -7,14 +7,15 @@ import Study from '../views/Study.vue'
 import MyWorld from '../views/MyWorld.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Home from '../views/Home.vue'
 import store from '../store'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: List
+    name: 'Home',
+    component: Home
   },
   {
     path: '/list',

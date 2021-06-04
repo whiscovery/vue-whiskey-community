@@ -190,9 +190,12 @@ export default {
 .title{
   font-weight: 800;
   margin-right: 30px;
+  font-size: 17px;
+  font-family: 'Exo 2', sans-serif;
 }
 .desc{
   font-size: 14px;
+  font-family: 'Exo 2', sans-serif;
 }
 .modiinput{
   margin-right: 20px;

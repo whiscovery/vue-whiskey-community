@@ -85,7 +85,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 /* .div2 {
     background: url('https://i.imgur.com/fIphHX5.png');
     background-size: 100% 100%;

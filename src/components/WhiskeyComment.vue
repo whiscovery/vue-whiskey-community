@@ -1,28 +1,27 @@
 <template>
 <div class="row align-items-center">
-        <div v-if="deleteOpen == true"  class="speech-bubble md-3 mt-3">
-        <form class="row row-cols-lg-auto g-3 align-items-center">
-          <div class="col-sm-12">
-            <div class="input-group">
-              <input type="password" v-model="패스워드" class="form-control" id="패스워드" placeholder="패스워드">
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="input-group">
-              <button @click.prevent="delComment(deleteId)" type="submit" class="btn btn-warning">삭제</button>
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="input-group">
-              <button @click="deleteOpen=false" type="submit" class="btn btn-success">취소</button>
-            </div>
-          </div>
-        </form>
+  <div>
+    <button @click="$emit('commentModalOpen', name)" class="btn btn-warning mb-2" type="button">코멘트 쓰기</button>
+  </div>
+    <div v-if="deleteOpen == true" class="speech-bubble md-3 mt-3">
+    <form class="row row-cols-lg-auto g-3 align-items-center">
+      <div class="col-sm-12">
+        <div class="input-group">
+          <input type="password" v-model="패스워드" class="form-control" id="패스워드" placeholder="패스워드">
+        </div>
       </div>
-
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button @click="$emit('commentModalOpen', name)" class="btn btn-warning mb-2" type="button">코멘트 쓰기</button>
-</div>
+      <div class="col-sm-12">
+        <div class="input-group">
+          <button @click.prevent="delComment(deleteId)" type="submit" class="btn btn-warning">삭제</button>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="input-group">
+          <button @click="deleteOpen=false" type="submit" class="btn btn-success">취소</button>
+        </div>
+      </div>
+    </form>
+  </div>
   <div class="wrapper" v-for="comment,i in comments" :key="i">
       <div v-if="deleteOpen == false" class="speech-bubble md-3 mt-3">
         <span class="badge bg-primary name">{{comment.이름}} </span><span class="comment-content"> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}}에서)</small> </span>
@@ -107,6 +106,7 @@ export default {
 <style scope>
 .wrapper{
     text-align: left;
+    width: 100%;
 }
 .comment{
     margin: 0px auto;
@@ -118,7 +118,7 @@ export default {
 .speech-bubble {
     position:relative;
     width:100%;
-    padding: 15px 5px 15px 20px;
+    padding: 15px 5px 15px 5px;
     background: #ecf0f1;
     border-radius: 10px;
 }

@@ -7,7 +7,7 @@
             <div class="wrapper m-1 p-1" v-for="whiskey, j in getWhiskeysList()" :key="j">
                 <div class="row mb-1">
                         <div class="col-1">
-                            <img :src="barrel" class="barrel-img m-1 me-1">
+                            <img :src="barrel" class="barrel-img m-1">
                         </div>
                         <div class="col-10 md-3 mt-2">
                              <button type="button" class="btn btn-outline-warning ms-3 text-truncate">
@@ -22,10 +22,10 @@
             <p class="title">Recent Comments</p>
             <div class="wrapper m-1 p-1" v-for="comment, i in getCommentsList()" :key="i">
                 <div class="row">
-                    <div class="col-md-2"><img :src="man1" width="100%" class="over-img">
+                    <div class="col-2"><img :src="man1" width="100%" class="over-img">
                         <span class="badge bg-dark over-letter m-1">{{comment.이름}}</span>
                     </div>
-                        <div class="col-md-10 speech-bubble md-3 mt-3">
+                        <div class="col-10 speech-bubble md-3 mt-3 ms-2">
                             <router-link class="text-link" :to="{ name: 'Detail', params: { postId: comment.위스키번호 }}"><span class="badge bg-warning name">{{comment.위스키이름}} </span></router-link><span class="comment-content"><small> ({{comment.일시}} @ {{comment.장소}}에서)</small></span><br />
                             <span class="comment-content"> "{{comment.내용}}"  </span>
                         </div>

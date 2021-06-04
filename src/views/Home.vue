@@ -9,7 +9,7 @@
                         <div class="col-1">
                             <img :src="barrel" class="barrel-img m-1">
                         </div>
-                        <div class="col-10 md-3 mt-2">
+                        <div class="col-11 md-3 mt-3">
                              <button type="button" class="btn btn-outline-warning ms-3 text-truncate">
                                  <router-link class="text-link" :to="{ name: 'Detail', params: { postId: whiskey.id }}"><span class="whiskey">{{whiskey.제품명}}</span></router-link>
                              </button>

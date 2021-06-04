@@ -4,7 +4,7 @@
 
     <div class="col">
             <p class="title">Recent Whiskeys</p>
-            <div class="wrapper m-1 p-1" v-for="whiskey, j in getWhiskeysList()" :key="j">
+            <div class="wrapper" v-for="whiskey, j in getWhiskeysList()" :key="j">
                 <div class="row mb-1">
                         <div class="col-1">
                             <img :src="barrel" class="barrel-img m-1">
@@ -20,7 +20,7 @@
     </div>
     <div class="col">
             <p class="title">Recent Comments</p>
-            <div class="wrapper m-1 p-1" v-for="comment, i in getCommentsList()" :key="i">
+            <div class="wrapper" v-for="comment, i in getCommentsList()" :key="i">
                 <div class="row">
                     <div class="col-2"><img :src="man1" width="100%" class="over-img">
                         <span class="badge bg-dark over-letter m-1">{{comment.이름}}</span>

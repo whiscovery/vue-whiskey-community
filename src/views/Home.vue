@@ -2,23 +2,25 @@
 <div class="container">
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2 mt-3 m-2">
 
-    <div class="col">
+    <div class="col" v-if="whiskeyslist">
             <p class="title">Recent Whiskeys</p>
             <div class="wrapper" v-for="whiskey, j in getWhiskeysList()" :key="j">
                 <div class="row mb-1">
                         <div class="col-1">
                             <img :src="barrel" class="barrel-img m-1">
                         </div>
-                        <div class="col-11 md-3 mt-3">
-                             <button type="button" class="btn btn-outline-warning ms-3 text-truncate">
+                        <div class="col-11 md-3 mt-2">
+                             <button type="button" class="btn btn-outline-warning ms-3 text-truncate btn-sm" v-if="whiskey.id">
                                  <router-link class="text-link" :to="{ name: 'Detail', params: { postId: whiskey.id }}"><span class="whiskey">{{whiskey.제품명}}</span></router-link>
                              </button>
+                             <button type="button" v-else>???</button>
                             <!-- <span class="comment-content"> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}}에서)</small> </span> -->
                         </div>
                 </div>
             </div>
     </div>
-    <div class="col">
+    <div class="col" v-else>값 불러 오는 중</div>
+    <div class="col" v-if="commentslist">
             <p class="title">Recent Comments</p>
             <div class="wrapper" v-for="comment, i in getCommentsList()" :key="i">
                 <div class="row">
@@ -32,6 +34,7 @@
                 </div>
             </div>
     </div>
+    <div class="col" v-else>값 불러 오는 중</div>
 </div>
 </div>
 </template>
@@ -62,21 +65,32 @@ export default {
          var temp = []
          var filtered = tempcomments.filter((element) => element.위스키번호 !== '0')
          filtered.sort((a, b) => {
-             return a._id > b._id ? 1 : a._id < b._id ? -1 : 0
+             return a._id.substring(0, 8) > b._id.substring(0, 8) ? -1 : a._id.substring(0, 8) < b._id.substring(0, 8) ? 1 : 0
          })
          for (var i = 0; i < 5; i++) {
-            temp.push(filtered[i])
+             if (filtered[i]) {
+                temp.push(filtered[i])
+             }
          }
          return temp
       },
       getWhiskeysList () {
-         var filtered = [...this.whiskeyslist]
+         var tempwhiskeys = [...this.whiskeyslist]
          var temp = []
+         var filtered = tempwhiskeys.filter((element) => element !== undefined)
+
+         for (var k = 0; k < filtered.length; k++) {
+             if (filtered[k]) {
+                console.log(filtered[k])
+             }
+         }
          filtered.sort((a, b) => {
              return a._id > b._id ? -1 : a._id < b._id ? 1 : 0
          })
          for (var i = 0; i < 10; i++) {
-            temp.push(filtered[i])
+             if (filtered[i]) {
+                temp.push(filtered[i])
+             }
          }
          return temp
       },
@@ -132,7 +146,7 @@ export default {
     font-family: 'Exo 2', sans-serif;
 }
 .barrel-img{
-    width: 50px;
+    width: 40px;
   position: relative;
   opacity: 0.0.8; filter: alpha(opacity=50);
 }
@@ -152,6 +166,7 @@ export default {
     font-family: 'Exo 2', sans-serif;
 }
 .whiskey{
+    font-size: 13px;
     color: rgb(49, 37, 37);
     font-family: 'Exo 2', sans-serif;
 }

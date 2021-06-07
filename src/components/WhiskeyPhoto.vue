@@ -7,7 +7,7 @@
   </div>
   <div class="wrapper" v-if="modistate == true">
     <div class="photo">
-      <UploadPhoto />
+      <UploadPhoto @getImageURL="uploadPhoto" />
       <button @click="modiPhoto" class="btn btn-warning mt-3 modi-photo">확인</button>
     </div>
   </div>
@@ -15,8 +15,10 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
+import { baseurl } from '@/config/index'
 import UploadPhoto from '@/components/UploadPhoto'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'WhiskeyPhoto',
   data () {
@@ -25,15 +27,39 @@ export default {
     }
   },
   props: {
-    photo: String
+    photo: String,
+    id: Number
   },
   components: {
     UploadPhoto: UploadPhoto
   },
+  computed: {
+    ...mapState(['whiskey'])
+  },
   methods: {
     modiPhoto () {
       this.modistate = false
-    }
+    },
+    uploadPhoto (value) {
+      axios.post(baseurl + '/editpost', {
+          id: this.id,
+          이미지: value,
+          패스워드: 'wkftodruTekwjdwlsdnr'
+        })
+        .then((res) => {
+          alert('수정되었습니다')
+          this.fetchWhiskey(this.id)
+          // this.$router.push({
+          //   name: 'Detail',
+          //   params: { postId: parseInt(this.id) }
+          // }).catch(() => {})
+        })
+        .catch((err) => {
+          // alert('패스워드가 맞지 않습니다')
+          console.log(err)
+        })
+    },
+    ...mapActions(['fetchWhiskey'])
   }
 }
 </script>

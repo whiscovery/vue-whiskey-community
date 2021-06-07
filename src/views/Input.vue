@@ -66,7 +66,7 @@ export default {
   name: 'Input',
   data () {
     return {
-      imgfile: '',
+      imgfile: 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg',
       whiskey: {},
       name: '',
       category: '',

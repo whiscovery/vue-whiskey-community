@@ -67,7 +67,7 @@ export default {
          filtered.sort((a, b) => {
              return a._id.substring(0, 8) > b._id.substring(0, 8) ? -1 : a._id.substring(0, 8) < b._id.substring(0, 8) ? 1 : 0
          })
-         for (var i = 0; i < 5; i++) {
+         for (var i = 0; i < 10; i++) {
              if (filtered[i]) {
                 temp.push(filtered[i])
              }
@@ -78,16 +78,10 @@ export default {
          var tempwhiskeys = [...this.whiskeyslist]
          var temp = []
          var filtered = tempwhiskeys.filter((element) => element !== undefined)
-
-         for (var k = 0; k < filtered.length; k++) {
-             if (filtered[k]) {
-                console.log(filtered[k])
-             }
-         }
          filtered.sort((a, b) => {
              return a._id > b._id ? -1 : a._id < b._id ? 1 : 0
          })
-         for (var i = 0; i < 10; i++) {
+         for (var i = 0; i < 15; i++) {
              if (filtered[i]) {
                 temp.push(filtered[i])
              }

@@ -55,7 +55,7 @@
       <div class="row gx-2 mt-5 mb-5" v-if="whiskey">
         <div class="test col-sm-3">
           <div class="hr-sect"><span class="badge bg-dark">제품 사진</span></div>
-          <div><WhiskeyPhoto :photo="whiskey.이미지"/></div>
+          <div><WhiskeyPhoto :photo="whiskey.이미지" :id="whiskey.id" /></div>
           <div class="boxDiv">
             <div class="hr-sect"><span class="badge bg-dark">사용자 테이스팅</span></div>
             <div><WhiskeyStatics v-if="whiskey.테이스팅점수 != undefined" :테이스팅점수="calData()" /></div>  <!--undefied 일 때 오류를 잡기 위해 v-if-->

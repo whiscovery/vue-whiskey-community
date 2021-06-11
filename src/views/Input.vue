@@ -66,7 +66,7 @@ export default {
   name: 'Input',
   data () {
     return {
-      imgfile: 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg',
+      imgfile: '',
       whiskey: {},
       name: '',
       category: '',
@@ -85,15 +85,15 @@ export default {
   methods: {
     btnOK () {
       axios.post(baseurl + '/writepost', {
-        제품명: this.name,
-        종류: this.category,
-        도수: this.degree,
-        이미지: this.imgfile,
-        가격대: this.price,
-        테이스팅: this.tasting,
-        설명: this.desc,
-        기타지식: this.etc,
-        특이사항: this.특이사항
+        제품명: this.name ? this.name : '없음',
+        종류: this.category ? this.category : '없음',
+        도수: this.degree ? this.degree : '없음',
+        이미지: this.imgfile ? this.imgfile : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg',
+        가격대: this.price ? this.price : '없음',
+        테이스팅: this.tasting ? this.tasting : '없음',
+        설명: this.desc ? this.desc : '없음',
+        기타지식: this.etc ? this.etc : '없음',
+        특이사항: this.특이사항 ? this.특이사항 : '없음'
       })
         .then((res) => {
           console.log(res)

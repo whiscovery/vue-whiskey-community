@@ -15,7 +15,9 @@ export default new Vuex.Store({
     whiskey: null,
     myrecords: [],
     comments: [],
-    commentslist: []
+    commentslist: [],
+    infolist: [],
+    info: []
   },
   getters: {
   },
@@ -25,6 +27,15 @@ export default new Vuex.Store({
       state.whiskeyslist.sort((a, b) => {
         return a.제품명 > b.제품명 ? 1 : a.제품명 < b.제품명 ? -1 : 0
       })
+    },
+    FETCH_INFO_LIST (state, payload) {
+      state.infolist = payload
+      state.infolist.sort((a, b) => {
+        return a.제목 > b.제목 ? 1 : a.제목 < b.제목 ? -1 : 0
+      })
+    },
+    FETCH_INFO (state, payload) {
+      state.info = payload
     },
     FETCH_WHISKEY (state, payload) {
       state.whiskey = payload
@@ -60,6 +71,18 @@ export default new Vuex.Store({
       axios.get(baseurl + '/whiskey/' + payload)
       .then((res) => {
         commit('FETCH_WHISKEY', res.data)
+      })
+    },
+    fetchInfo ({ commit }, payload) {
+      axios.get(baseurl + '/info/' + payload)
+      .then((res) => {
+        commit('FETCH_INFO', res.data)
+      })
+    },
+    fetchInfoList ({ commit }) {
+      axios.get(baseurl + '/infolist')
+      .then((res) => {
+        commit('FETCH_INFO_LIST', res.data)
       })
     },
     fetchMyRecords ({ commit }, payload) {

@@ -1,6 +1,7 @@
 <template>
   <div>
       {{data}}
+      <button @click="$emit('closeModal')">닫기</button>
   </div>
 </template>
 

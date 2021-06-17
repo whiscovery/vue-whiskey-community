@@ -3,7 +3,7 @@
     <transition name="contactModal">
         <div v-if="viewModal" class="black-bg">
             <div class="white-bg">
-                <Content :data="viewContentId" />
+                <Content :data="viewContentId" @closeModal="viewModal = false" />
             </div>
         </div>
     </transition>

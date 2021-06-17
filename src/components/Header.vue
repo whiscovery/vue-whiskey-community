@@ -44,6 +44,9 @@
   <symbol id="myworld" viewBox="0 0 20 20">
     <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
   </symbol>
+  <symbol id="info" viewBox="0 0 20 20">
+    <path d="M15.396,2.292H4.604c-0.212,0-0.385,0.174-0.385,0.386v14.646c0,0.212,0.173,0.385,0.385,0.385h10.792c0.211,0,0.385-0.173,0.385-0.385V2.677C15.781,2.465,15.607,2.292,15.396,2.292 M15.01,16.938H4.99v-2.698h1.609c0.156,0.449,0.586,0.771,1.089,0.771c0.638,0,1.156-0.519,1.156-1.156s-0.519-1.156-1.156-1.156c-0.503,0-0.933,0.321-1.089,0.771H4.99v-3.083h1.609c0.156,0.449,0.586,0.771,1.089,0.771c0.638,0,1.156-0.518,1.156-1.156c0-0.638-0.519-1.156-1.156-1.156c-0.503,0-0.933,0.322-1.089,0.771H4.99V6.531h1.609C6.755,6.98,7.185,7.302,7.688,7.302c0.638,0,1.156-0.519,1.156-1.156c0-0.638-0.519-1.156-1.156-1.156c-0.503,0-0.933,0.322-1.089,0.771H4.99V3.062h10.02V16.938z M7.302,13.854c0-0.212,0.173-0.386,0.385-0.386s0.385,0.174,0.385,0.386s-0.173,0.385-0.385,0.385S7.302,14.066,7.302,13.854 M7.302,10c0-0.212,0.173-0.385,0.385-0.385S8.073,9.788,8.073,10s-0.173,0.385-0.385,0.385S7.302,10.212,7.302,10 M7.302,6.146c0-0.212,0.173-0.386,0.385-0.386s0.385,0.174,0.385,0.386S7.899,6.531,7.688,6.531S7.302,6.358,7.302,6.146"></path>
+  </symbol>
 
 </svg>
     <div class="py-2 bg-dark text-white">
@@ -60,31 +63,31 @@
             <li>
               <router-link to="/list" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#grid"/></svg>
-                List
+                목록
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/info" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#info"/></svg>
+                정보
               </router-link>
             </li>
             <li>
               <router-link to="/study" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#study"/></svg>
-                Study
+                스터디
               </router-link>
             </li>
             <li>
               <router-link to="/input" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#speedometer2"/></svg>
-                New
-              </router-link>
-            </li>
-            <li v-if="isLogin == true">
-              <router-link to="/myworld" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#people-circle"/></svg>
-                My World
+                입력
               </router-link>
             </li>
             <li v-if="!isLoggedIn">
               <router-link to="/login" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#login"/></svg>
-                Login
+                로그인
               </router-link>
             </li>
             <li v-if="isLoggedIn">
@@ -96,7 +99,7 @@
             <li v-if="isLoggedIn">
                <a to="/logout" class="nav-link text-white" @click.prevent="logoutUser">
                 <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#login"/></svg>
-                Logout
+                로그아웃
               </a>
             </li>
           </ul>

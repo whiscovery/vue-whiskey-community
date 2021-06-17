@@ -8,6 +8,7 @@ import MyWorld from '../views/MyWorld.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Home from '../views/Home.vue'
+import Info from '../views/Info.vue'
 import store from '../store'
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/list',
     name: 'list',
     component: List
+  },
+  {
+    path: '/info',
+    name: 'Info',
+    component: Info
   },
   {
     path: '/input',

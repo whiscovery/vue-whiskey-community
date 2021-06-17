@@ -3,27 +3,54 @@
     <transition name="contactModal">
         <div v-if="viewModal" class="black-bg">
             <div class="white-bg">
-            111
+                <Content :data="viewContentId" />
             </div>
         </div>
     </transition>
 
     <div class="container">
         <ul class="list-group list-group-flush info-list">
-            <li class="list-group-item">An item</li>
+            <li v-for="info, i in filteredInfo" :key="i" class="list-group-item" @click="viewContent(info.id)">{{info.제목}}</li>
         </ul>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import Content from '@/components/Content'
+
 export default {
     name: 'Info',
     data () {
         return {
-            viewModal: false
+            viewModal: false,
+            infosearch: '',
+            viewContentId: 0
         }
+    },
+    components: {
+        Content
+    },
+    created () {
+    this.fetchInfoList()
+  },
+  computed: {
+    ...mapState(['infolist']),
+    // 위스키 정보 데이터 중 '제품명' 필드에 검색어가 포함되어 있는지 확인 후 참이면 반환
+    filteredInfo () {
+      return this.$store.state.infolist.filter((data) => {
+        return data.제목.toUpperCase().includes(this.infosearch.toUpperCase())
+      })
     }
+  },
+  methods: {
+      viewContent (value) {
+          this.viewModal = true
+          this.viewContentId = value
+      },
+    ...mapActions(['fetchInfoList'])
+  }
 }
 </script>
 

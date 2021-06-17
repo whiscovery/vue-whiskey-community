@@ -9,6 +9,8 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Home from '../views/Home.vue'
 import Info from '../views/Info.vue'
+import InfoList from '@/components/Info/InfoList'
+import InfoInsert from '@/components/Info/InfoInsert'
 import store from '../store'
 Vue.use(VueRouter)
 
@@ -26,7 +28,11 @@ const routes = [
   {
     path: '/info',
     name: 'Info',
-    component: Info
+    component: Info,
+    children: [
+      { path: 'insert', name: 'InfoInsert', component: InfoInsert },
+      { path: 'list', name: 'InfoList', component: InfoList }
+    ]
   },
   {
     path: '/input',

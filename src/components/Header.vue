@@ -63,13 +63,13 @@
             <li>
               <router-link to="/list" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#grid"/></svg>
-                목록
+                위스키
               </router-link>
             </li>
             <li>
               <router-link to="/info/list" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#info"/></svg>
-                정보
+                잡지식
               </router-link>
             </li>
             <li>

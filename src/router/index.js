@@ -26,12 +26,12 @@ const routes = [
     component: List
   },
   {
-    path: '/info/list',
+    path: '/info',
     name: 'Info',
     component: Info,
     children: [
-      { path: 'insert', name: 'InfoInsert', component: InfoInsert },
-      { path: 'list', name: 'InfoList', component: InfoList }
+      { path: 'list', name: 'InfoList', component: InfoList },
+      { path: 'insert', name: 'InfoInsert', component: InfoInsert }
     ]
   },
   {

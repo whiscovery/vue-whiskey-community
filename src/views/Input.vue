@@ -96,8 +96,6 @@ export default {
         특이사항: this.특이사항 ? this.특이사항 : '없음'
       })
         .then((res) => {
-          console.log(res)
-
           this.$router.push({
             name: 'list'
           })

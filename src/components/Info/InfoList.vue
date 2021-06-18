@@ -3,15 +3,29 @@
     <transition name="contactModal">
         <div v-if="viewModal" class="black-bg">
             <div class="white-bg">
-                <Content :data="viewContentId" @closeModal="viewModal = false" />
+                <Content :data="viewContentItem" @closeModal="viewModal = false" />
             </div>
         </div>
     </transition>
 
     <div class="container">
-        <ul class="list-group list-group-flush info-list">
-            <li v-for="info, i in filteredInfo" :key="i" class="list-group-item" @click="viewContent(info.id)">{{info.제목}}</li>
-        </ul>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <input class="form-control" v-model="infosearch" placeholder="제목 검색">
+          </div>
+          <table class="table mt-3">
+  <thead>
+    <tr>
+      <th style="width: 70%" scope="col">제목</th>
+      <th style="width: 30%" scope="col">키워드</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="info, i in filteredInfo" :key="i" >
+      <td @click="viewContent(info.id)" class="title-style"><b>{{info.제목}}</b></td>
+      <td class="keyword-style">{{info.키워드}}</td>
+    </tr>
+  </tbody>
+  </table>
     </div>
   </div>
 </template>
@@ -19,6 +33,8 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import Content from '@/components/Content'
+import axios from 'axios'
+import { baseurl } from '@/config/index'
 
 export default {
     name: 'InfoList',
@@ -26,7 +42,8 @@ export default {
         return {
             viewModal: false,
             infosearch: '',
-            viewContentId: 0
+            viewContentId: 0,
+            viewContentItem: []
         }
     },
     components: {
@@ -46,6 +63,13 @@ export default {
   },
   methods: {
       viewContent (value) {
+        axios.get(baseurl + '/info/' + value)
+          .then((res) => {
+            this.viewContentItem = res.data
+            })
+          .catch((err) => {
+            console.log(err)
+          })
           this.viewModal = true
           this.viewContentId = value
       },
@@ -55,6 +79,16 @@ export default {
 </script>
 
 <style scoped>
+.title-style{
+  font-size: 13px;
+  text-align: left;
+  padding-left: 20px;
+  }
+.keyword-style{
+  font-size: 11px;
+  vertical-align: center;
+  }
+
 .info-list{
     text-align: left;
 }
@@ -78,7 +112,7 @@ export default {
   color: #000;
   top: 50%;
   left: 50%;
-  width: 80%;
+  width: 70%;
   height: 100%;
   overflow: scroll;
   background: #fff;

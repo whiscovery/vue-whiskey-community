@@ -19,8 +19,12 @@
             </div>
       <div class="col-md-7">
             <div class="col-12 form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here" v-model="내용" style="height: 450px"></textarea>
+                <textarea class="form-control" placeholder="Leave a comment here" v-model="내용" style="height: 400px"></textarea>
                 <label for="내용">관련 정보</label>
+            </div>
+            <div class="col-md-12 mt-2 form-floating">
+                <input type="text" class="form-control" v-model="키워드" placeholder="키워드">
+                <label for="키워드">키워드</label>
             </div>
       </div>
             <div class="col-12">
@@ -54,12 +58,12 @@ export default {
             const data = {
                 제목: this.제목 ? this.제목 : '제목없음',
                 내용: this.내용 ? this.내용 : '내용없음',
+                키워드: this.키워드 ? this.키워드 : '키워드',
                 비밀번호: this.비밀번호
             }
             console.log(data)
             axios.post(baseurl + '/writeinfo', data)
             .then((res) => {
-                console.log(res)
                 alert('입력되었습니다')
             })
             .catch((err) => {

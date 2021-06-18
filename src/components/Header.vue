@@ -67,7 +67,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/info" class="nav-link text-white">
+              <router-link to="/info/list" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="20" height="20"><use xlink:href="#info"/></svg>
                 정보
               </router-link>

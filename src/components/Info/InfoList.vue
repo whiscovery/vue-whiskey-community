@@ -63,6 +63,7 @@ export default {
   },
   methods: {
       viewContent (value) {
+        this.viewContentItem = []
         axios.get(baseurl + '/info/' + value)
           .then((res) => {
             this.viewContentItem = res.data

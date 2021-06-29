@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-11 md-3 mt-2">
                              <button type="button" class="btn btn-outline-warning ms-3 text-truncate btn-sm" v-if="info.id">
-                                 <router-link class="text-link" :to="{ name: 'Info'}"><span class="whiskey">{{info.제목}}</span></router-link>
+                                 <router-link class="text-link" :to="{ name: 'InfoList'}"><span class="whiskey">{{info.제목}}</span></router-link>
                              </button>
                              <button type="button" v-else>???</button>
                             <!-- <span class="comment-content"> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}}에서)</small> </span> -->

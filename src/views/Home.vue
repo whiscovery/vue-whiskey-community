@@ -2,8 +2,9 @@
 <div class="container">
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2 mt-3 m-2">
 
+<div class="col">
     <div class="col" v-if="whiskeyslist">
-            <p class="title">Recent Whiskeys</p>
+            <p class="title">새로 입력된 위스키</p>
             <div class="wrapper" v-for="whiskey, j in getWhiskeysList()" :key="j">
                 <div class="row mb-1">
                         <div class="col-1">
@@ -20,8 +21,30 @@
             </div>
     </div>
     <div class="col" v-else>값 불러 오는 중</div>
+    <div class="col blank"></div>
+    <div class="col" v-if="infolist">
+            <p class="title">새로 입력된 정보</p>
+            <div class="wrapper" v-for="info, j in getInfoList()" :key="j">
+                <div class="row mb-1">
+                        <div class="col-1">
+                            <img :src="barrel" class="barrel-img m-1">
+                        </div>
+                        <div class="col-11 md-3 mt-2">
+                             <button type="button" class="btn btn-outline-warning ms-3 text-truncate btn-sm" v-if="info.id">
+                                 <router-link class="text-link" :to="{ name: 'Info'}"><span class="whiskey">{{info.제목}}</span></router-link>
+                             </button>
+                             <button type="button" v-else>???</button>
+                            <!-- <span class="comment-content"> "{{comment.내용}}" <small>({{comment.일시}} @ {{comment.장소}}에서)</small> </span> -->
+                        </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="col" v-else>값 불러 오는 중</div>
+</div>
+
     <div class="col" v-if="commentslist">
-            <p class="title">Recent Comments</p>
+            <p class="title">최근 코멘트</p>
             <div class="wrapper" v-for="comment, i in getCommentsList()" :key="i">
                 <div class="row">
                     <div class="col-2"><img :src="man1" width="100%" class="over-img">
@@ -55,9 +78,10 @@ export default {
   created () {
     this.fetchWhiskeysList()
     this.fetchCommentList()
+    this.fetchInfoList()
   },
   computed: {
-    ...mapState(['whiskeyslist', 'commentslist'])
+    ...mapState(['whiskeyslist', 'commentslist', 'infolist'])
   },
   methods: {
       getCommentsList () {
@@ -79,16 +103,30 @@ export default {
          var temp = []
          var filtered = tempwhiskeys.filter((element) => element !== undefined)
          filtered.sort((a, b) => {
-             return a._id > b._id ? -1 : a._id < b._id ? 1 : 0
+             return a.id > b.id ? -1 : a.id < b.id ? 1 : 0
          })
-         for (var i = 0; i < 15; i++) {
+         for (var i = 0; i < 8; i++) {
              if (filtered[i]) {
                 temp.push(filtered[i])
              }
          }
          return temp
       },
-    ...mapActions(['fetchWhiskeysList', 'fetchCommentList'])
+      getInfoList () {
+         var tempinfos = [...this.infolist]
+         var temp = []
+         var filtered = tempinfos.filter((element) => element !== undefined)
+         filtered.sort((a, b) => {
+             return a.id > b.id ? -1 : a.id < b.id ? 1 : 0
+         })
+         for (var i = 0; i < 8; i++) {
+             if (filtered[i]) {
+                temp.push(filtered[i])
+             }
+         }
+         return temp
+      },
+    ...mapActions(['fetchWhiskeysList', 'fetchCommentList', 'fetchInfoList'])
   }
 }
 </script>
@@ -163,5 +201,8 @@ export default {
     font-size: 13px;
     color: rgb(49, 37, 37);
     font-family: 'Exo 2', sans-serif;
+}
+.blank{
+    height: 60px;
 }
 </style>

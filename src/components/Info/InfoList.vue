@@ -113,7 +113,7 @@ export default {
   color: #000;
   top: 50%;
   left: 50%;
-  width: 70%;
+  width: 80%;
   height: 100%;
   overflow: scroll;
   background: #fff;
@@ -146,7 +146,7 @@ export default {
     color: #000;
     top: 50%;
     left: 50%;
-    width: 90%;
+    width: 95%;
     background-color: #fff;
     border-radius: 8px;
     padding: 10px;
